@@ -4,5 +4,5 @@ import 'package:meta/meta.dart';
 part 'diary_state.dart';
 
 class DiaryCubit extends Cubit<DiaryState> {
-  DiaryCubit() : super(DiaryInitial());
+  DiaryCubit() : super(DiaryState());
 }
