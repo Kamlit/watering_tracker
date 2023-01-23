@@ -11,20 +11,17 @@ class SemiCircularProgressBar extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Positioned(
-          child: SizedBox(
-            height: size/2*10,
-            width: size*10,
-            child: CustomPaint(
-              painter: SemiCirclePainter(
-                backgroundColor: const Color.fromARGB(255, 56, 56, 56),
-                progressBarColor: Colors.amber,
-                progressBarFraction: 0.3,
-                barWidth: 20,
-              ),
+          child: CustomPaint(
+            size: Size(size * 10, size / 2 * 10),
+            painter: SemiCirclePainter(
+              backgroundColor: const Color.fromARGB(255, 56, 56, 56),
+              progressBarColors: [Colors.amber, Colors.green, Colors.blue],
+              progressBarFractions: [0.1, 0.1, 0.1],
+              barWidth: 20,
             ),
           ),
         ),
-        Positioned.fill(
+        const Positioned.fill(
           top: 50,
           child: Center(
             child: Text(

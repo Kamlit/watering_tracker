@@ -62,6 +62,7 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
                   onPressed: () {},
@@ -76,6 +77,10 @@ class HomeScreen extends StatelessWidget {
                     minimumSize: Size(60, 60),
                     maximumSize: Size(60, 60),
                   ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Sign Up with Google'),
                 ),
               ],
             ),
