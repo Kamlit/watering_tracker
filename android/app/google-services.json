@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "840327266263",
-    "project_id": "waterin-tracker",
-    "storage_bucket": "waterin-tracker.appspot.com"
+    "project_number": "50793084076",
+    "project_id": "drink-tracker-67c0f",
+    "storage_bucket": "drink-tracker-67c0f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:840327266263:android:45eaf62ff33c7456521592",
+        "mobilesdk_app_id": "1:50793084076:android:1c2bf45884b1d3d9295b09",
         "android_client_info": {
           "package_name": "com.example.drink_tracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "840327266263-tv2fv0a0o6pfg4frc3eo0i9ph71lqgkp.apps.googleusercontent.com",
+          "client_id": "50793084076-35jh1gr6s84ui2ga4ur3jemkdkorstq2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBCc-pRSQLR6OV5cOcLtFZVBXPzkkFJ9Rg"
+          "current_key": "AIzaSyCA2iqQOKd9HLvZr_cOwrbfl1-vcdtFSzw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "840327266263-tv2fv0a0o6pfg4frc3eo0i9ph71lqgkp.apps.googleusercontent.com",
+              "client_id": "50793084076-35jh1gr6s84ui2ga4ur3jemkdkorstq2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

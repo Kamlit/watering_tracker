@@ -1,14 +1,20 @@
+import 'package:drink_tracker/logic/blocs/authentication_bloc.dart';
+import 'package:drink_tracker/logic/blocs/authentication_observer.dart';
+import 'package:drink_tracker/logic/repositories/authorization_repository.dart';
+import 'package:drink_tracker/logic/routes.dart';
 import 'package:drink_tracker/presentation/screens/home/home_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:drink_tracker/presentation/screens/login/login_screen.dart';
+import 'package:drink_tracker/presentation/screens/loading/loading_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'dart:math' as math;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Paint.enableDithering = true;
+  Bloc.observer = AuthenticationObserver();
   runApp(const MyApp());
 }
 
@@ -17,9 +23,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Drinking Tracker',
-      home: HomeScreen(),
+    return RepositoryProvider(
+      create: (context) => AuthorizationRepository(),
+      child: BlocProvider(
+        create: (context) => AuthenticationBloc(
+          authorizationRepository:
+              RepositoryProvider.of<AuthorizationRepository>(context),
+        )..add(AppStarted()),
+        child: MaterialApp(
+          title: 'Drinking Tracker',
+          home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+            builder: (context, state) {
+              if(state is Authenticated) {
+                return const HomeScreen();
+              } else if (state is Unauthenticated) {
+                return const LoginScreen();
+              } else if(state is AuthenticationError) {
+                return const Center(child: Text('Error'));
+              }
+              return const LoadingScreen();
+            },
+          ),
+          routes: Routes.routes,
+        ),
+      ),
     );
   }
 }

@@ -1,16 +1,22 @@
+import 'package:drink_tracker/logic/blocs/authentication_bloc.dart';
+import 'package:drink_tracker/presentation/app_drawer.dart';
 import 'package:drink_tracker/presentation/screens/home/semi_circular_progress_bar.dart';
 import 'package:drink_tracker/presentation/screens/home/transparent_app_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawerEnableOpenDragGesture: false,
       backgroundColor: Color.fromARGB(255, 36, 36, 36),
-      drawer: const Drawer(),
+      drawer: AppDrawer(user: FirebaseAuth.instance.currentUser),
       appBar: const TransparentAppBar(
         height: 80,
       ),
@@ -65,7 +71,7 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => {} ,
                   child: Icon(
                     Icons.add,
                   ),
@@ -78,10 +84,7 @@ class HomeScreen extends StatelessWidget {
                     maximumSize: Size(60, 60),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Sign Up with Google'),
-                ),
+                
               ],
             ),
           ),
