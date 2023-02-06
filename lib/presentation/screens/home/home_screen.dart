@@ -2,14 +2,13 @@ import 'package:drink_tracker/logic/blocs/authentication_bloc.dart';
 import 'package:drink_tracker/presentation/app_drawer.dart';
 import 'package:drink_tracker/presentation/screens/home/semi_circular_progress_bar.dart';
 import 'package:drink_tracker/presentation/screens/home/transparent_app_bar.dart';
+import 'package:drink_tracker/presentation/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +41,15 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     '1200 ml',
-                    style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                    style: AppTextStyle.h1White,
                   ),
                   Text(
                     'Goal: 2000 ml',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(127, 255, 255, 255),
-                    ),
+                    style: AppTextStyle.h3,
                   ),
                   Text(
                     '800 ml left',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(127, 255, 255, 255),
-                    ),
+                    style: AppTextStyle.h3,
                   ),
                 ],
               ),
@@ -71,12 +61,12 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () => {} ,
+                  onPressed: () => {},
                   child: Icon(
                     Icons.add,
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 56, 56, 56),
+                    backgroundColor: AppColors.greyDark,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(90),
                     ),
@@ -84,7 +74,6 @@ class HomeScreen extends StatelessWidget {
                     maximumSize: Size(60, 60),
                   ),
                 ),
-                
               ],
             ),
           ),
@@ -95,20 +84,20 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 10,
           ),
           Container(
             width: double.infinity,
-            height: 50,
+            height: 60,
             decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 26, 26, 26),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 26, 26, 26),
-                  blurRadius: 18,
-                  spreadRadius: 20,
-                )
-              ],
+              color: AppColors.dark,
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Color.fromARGB(255, 26, 26, 26),
+              //     blurRadius: 18,
+              //     spreadRadius: 20,
+              //   )
+              // ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -119,11 +108,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Text(
                   'Details',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyle.h2,
                 ),
                 Icon(
                   Icons.arrow_drop_down,

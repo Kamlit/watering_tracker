@@ -1,4 +1,5 @@
 import 'package:drink_tracker/presentation/screens/home/semi_circle_painter.dart';
+import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 
 class SemiCircularProgressBar extends StatelessWidget {
@@ -26,11 +27,7 @@ class SemiCircularProgressBar extends StatelessWidget {
           child: Center(
             child: Text(
               '30%',
-              style: TextStyle(
-                fontSize: 50,
-                color: Color.fromARGB(127, 255, 255, 255),
-                fontWeight: FontWeight.bold,
-              ),
+              style: AppTextStyle.h1Grey,
             ),
           ),
         )

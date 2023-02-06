@@ -17,6 +17,7 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      titleTextStyle: const TextStyle(),
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       elevation: 0,

@@ -1,4 +1,5 @@
 import 'package:drink_tracker/logic/blocs/authentication_bloc.dart';
+import 'package:drink_tracker/presentation/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,12 +19,12 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        backgroundColor: Color.fromARGB(255, 36, 36, 36),
+        backgroundColor: AppColors.backgroundColor,
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(15),
-              color: Color.fromARGB(255, 22, 22, 22),
+              padding: const EdgeInsets.all(15),
+              color: AppColors.dark,
               height: 150,
               child: Row(
                 children: [
@@ -41,19 +42,12 @@ class AppDrawer extends StatelessWidget {
                     children: [
                       Text(
                         user!.displayName.toString(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTextStyle.h2,
                       ),
-                      Text(
-                        user!.email.toString(),
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                        ),
+                      const SizedBox(
+                        height: 5,
                       ),
+                      Text(user!.email.toString(), style: AppTextStyle.h3),
                       TextButton(
                         onPressed: () => _signOut(context),
                         child: const Text('Logout'),
