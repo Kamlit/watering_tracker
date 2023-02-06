@@ -1,4 +1,4 @@
-import 'package:drink_tracker/presentation/screens/home/day_title.dart';
+import 'package:drink_tracker/presentation/widgets/day_title.dart';
 import 'package:flutter/material.dart';
 
 class TransparentAppBar extends StatefulWidget implements PreferredSizeWidget {

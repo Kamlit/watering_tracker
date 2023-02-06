@@ -1,4 +1,4 @@
-import 'package:drink_tracker/presentation/screens/home/semi_circle_painter.dart';
+import 'package:drink_tracker/presentation/widgets/semi_circle_painter.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 
