@@ -1,4 +1,4 @@
-import 'package:drink_tracker/logic/blocs/authentication_bloc.dart';
+import 'package:drink_tracker/logic/blocs/authentication/authentication_bloc.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ class ProfileContainer extends StatelessWidget {
   const ProfileContainer({required this.user, super.key});
  
   final User? user;
-  
+
   void _signOut(BuildContext context) {
     BlocProvider.of<AuthenticationBloc>(context).add(
       SignOutRequested(),

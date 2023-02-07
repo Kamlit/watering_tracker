@@ -1,5 +1,5 @@
-import 'package:drink_tracker/logic/blocs/authentication_bloc.dart';
-import 'package:drink_tracker/logic/routes.dart';
+import 'package:drink_tracker/logic/blocs/authentication/authentication_bloc.dart';
+import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 36, 36, 36),
+      backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: ElevatedButton(
           onPressed: () => _signIn(context),

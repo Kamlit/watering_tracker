@@ -1,4 +1,4 @@
-import 'package:drink_tracker/logic/blocs/authentication_observer.dart';
+import 'package:drink_tracker/logic/blocs/authentication/authentication_observer.dart';
 import 'package:drink_tracker/presentation/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

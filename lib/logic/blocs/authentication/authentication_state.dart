@@ -1,7 +1,9 @@
 part of 'authentication_bloc.dart';
 
 @immutable
-abstract class AuthenticationState extends Equatable {}
+abstract class AuthenticationState extends Equatable {
+  const AuthenticationState();
+}
 
 class AuthenticationUninitialized extends AuthenticationState {
   @override
@@ -24,7 +26,7 @@ class Unauthenticated extends AuthenticationState {
 }
 
 class AuthenticationError extends AuthenticationState {
-  AuthenticationError(this.error);
+  const AuthenticationError(this.error);
 
   final String error;
 
