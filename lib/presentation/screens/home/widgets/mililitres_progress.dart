@@ -17,7 +17,7 @@ class MililitresProgress extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  state.diary.values.first.first.mililitres.toString(),
+                  state.diary.values.first.first.amount.toString(),
                   style: AppTextStyle.h1White,
                 ),
                 Text(

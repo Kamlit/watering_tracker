@@ -1,8 +1,8 @@
-import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/blocs/diary/diary_bloc.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
 import 'package:drink_tracker/logic/models/drink_type.dart';
-import 'package:drink_tracker/presentation/style.dart';
+import 'package:drink_tracker/presentation/screens/home/add_entry/select_amount_page.dart';
+import 'package:drink_tracker/presentation/screens/home/add_entry/select_drink_type_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,7 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
   final PageController _pageController = PageController();
 
   late DrinkType _drinkType;
-  late int _mililitres;
+  late int _amount;
 
   void _addEntry(BuildContext context) {
     final now = DateTime.now();
@@ -27,9 +27,23 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
         date: DateTime(now.year, now.month, now.day),
         entry: DiaryEntry(
           drinkType: _drinkType,
-          mililitres: _mililitres,
+          amount: _amount,
         ),
       ),
+    );
+  }
+
+  void _nextPage() {
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
+  }
+
+  void _previousPage() {
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
     );
   }
 
@@ -38,7 +52,7 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
     _pageController.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,70 +63,20 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Center(
-                  child: Text(
-                    'Drink type',
-                    style: AppTextStyle.h2,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: drinkTypes.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        _drinkType = drinkTypes[index];
-                        _pageController.nextPage(
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.ease,
-                        );
-                      },
-                      title: Text(
-                        drinkTypes[index].name,
-                        style: AppTextStyle.h3,
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
+          SelectDrinkTypePage(
+            onSelected: (selected) {
+              _drinkType = selected;
+              _nextPage();
+            },
           ),
-          Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(10),
-                child: Center(
-                  child: Text(
-                    'Amount',
-                    style: AppTextStyle.h2,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextField(
-                  onSubmitted: (value) {
-                    _mililitres = int.parse(value);
-                    _addEntry(context);
-                  },
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  _pageController.previousPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.ease,
-                  );
-                },
-                child: const Text('Back'),
-              ),
-            ],
-          ),
+          SelectAmountPage(
+            onBack: _previousPage,
+            onSelected: (selected) {
+              _amount = selected;
+              _addEntry(context);
+              Navigator.pop(context);
+            },
+          )
         ],
       ),
     );

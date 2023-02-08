@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DetailsBottomContainer extends StatelessWidget {
   const DetailsBottomContainer({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,8 +11,12 @@ class DetailsBottomContainer extends StatelessWidget {
       height: 60,
       decoration: const BoxDecoration(
         color: AppColors.dark,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
+        ),
       ),
       child: Row(
+        
         mainAxisAlignment: MainAxisAlignment.center,
         children: const [
           Icon(

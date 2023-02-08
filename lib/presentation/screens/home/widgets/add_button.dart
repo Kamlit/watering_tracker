@@ -1,6 +1,4 @@
-import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/blocs/diary/diary_bloc.dart';
-import 'package:drink_tracker/logic/models/diary_entry.dart';
 import 'package:drink_tracker/presentation/screens/home/add_entry/add_entry_modal_bottom_sheet.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +8,6 @@ class AddButton extends StatelessWidget {
   const AddButton({super.key});
 
   void _showModalBottomSheet(BuildContext context) {
-    DiaryEntry? newEntry;
-
     showModalBottomSheet<void>(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -23,7 +19,7 @@ class AddButton extends StatelessWidget {
       builder: (_) {
         return BlocProvider.value(
           value: BlocProvider.of<DiaryBloc>(context),
-          child: AddEntryModalBottomSheet(),
+          child: const AddEntryModalBottomSheet(),
         );
       },
     );
