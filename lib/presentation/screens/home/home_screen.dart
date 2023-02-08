@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
           diaryRepository: RepositoryProvider.of<DiaryRepository>(context),
         ),
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           drawerEnableOpenDragGesture: false,
           backgroundColor: AppColors.backgroundColor,
           drawer: const AppDrawer(),

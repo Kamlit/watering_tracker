@@ -1,6 +1,7 @@
 import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/blocs/diary/diary_bloc.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
+import 'package:drink_tracker/presentation/screens/home/add_entry/add_entry_modal_bottom_sheet.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,17 +9,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddButton extends StatelessWidget {
   const AddButton({super.key});
 
-  void _addEntry(BuildContext context) {
-    final now = DateTime.now();
-    BlocProvider.of<DiaryBloc>(context).add(
-      AddEntryRequested(
-        date: DateTime(now.year, now.month, now.day),
-        entry: DiaryEntry(
-          drinkType:
-              drinkTypes.firstWhere((element) => element.name == 'water'),
-          mililitres: 250,
+  void _showModalBottomSheet(BuildContext context) {
+    DiaryEntry? newEntry;
+
+    showModalBottomSheet<void>(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(25),
         ),
       ),
+      backgroundColor: AppColors.backgroundColor,
+      context: context,
+      builder: (_) {
+        return BlocProvider.value(
+          value: BlocProvider.of<DiaryBloc>(context),
+          child: AddEntryModalBottomSheet(),
+        );
+      },
     );
   }
 
@@ -28,7 +35,7 @@ class AddButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ElevatedButton(
-          onPressed: () => _addEntry(context),
+          onPressed: () => _showModalBottomSheet(context),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.greyDark,
             shape: RoundedRectangleBorder(
