@@ -8,4 +8,9 @@ class DrinkType {
 
   final String name;
   final Color color;
+
+  @override
+  String toString() {
+    return 'DrinkType{$name, $color}';
+  }
 }

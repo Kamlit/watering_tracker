@@ -11,13 +11,12 @@ class MililitresProgress extends StatelessWidget {
     return BlocBuilder<DiaryBloc, DiaryState>(
       builder: (context, state) {
         if (state is DiaryLoaded) {
-          print(state.diary.entries);
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  state.diary.values.first.first.amount.toString(),
+                  state.totalAmount.toString(),
                   style: AppTextStyle.h1White,
                 ),
                 Text(

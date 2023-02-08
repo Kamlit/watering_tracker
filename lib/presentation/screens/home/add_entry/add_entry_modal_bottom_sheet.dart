@@ -23,7 +23,7 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
   void _addEntry(BuildContext context) {
     final now = DateTime.now();
     BlocProvider.of<DiaryBloc>(context).add(
-      AddEntryRequested(
+      AddEntry(
         date: DateTime(now.year, now.month, now.day),
         entry: DiaryEntry(
           drinkType: _drinkType,

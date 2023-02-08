@@ -16,11 +16,16 @@ class DiaryLoading extends DiaryState {
 }
 
 class DiaryLoaded extends DiaryState {
-  const DiaryLoaded(this.diary);
+  const DiaryLoaded({
+    required this.entries,
+    required this.totalAmount,
+  });
 
-  final Map<DateTime, List<DiaryEntry>> diary;
+  final List<DiaryEntry> entries;
+  final int totalAmount;
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [entries, totalAmount];
 }
 
 class DiaryError extends DiaryState {

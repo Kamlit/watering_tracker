@@ -9,11 +9,11 @@ part 'diary_state.dart';
 
 class DiaryBloc extends Bloc<DiaryEvent, DiaryState> {
   DiaryBloc({required this.diaryRepository}) : super(DiaryLoading()) {
-    on<AddEntryRequested>(_onAddEntryRequested);
+    on<AddEntry>(_onAddEntryRequested);
   }
 
   void _onAddEntryRequested(
-    AddEntryRequested event,
+    AddEntry event,
     Emitter<DiaryState> emit,
   ) {
     emit(DiaryLoading());
@@ -22,7 +22,14 @@ class DiaryBloc extends Bloc<DiaryEvent, DiaryState> {
         date: event.date,
         entry: event.entry,
       );
-      emit(DiaryLoaded(diaryRepository.diary));
+      final entries = diaryRepository.diary[event.date];
+      final totalAmount = diaryRepository.totalAmount(event.date);
+      emit(
+        DiaryLoaded(
+          entries: entries!,
+          totalAmount: totalAmount,
+        ),
+      );
     } catch (e) {
       emit(DiaryError(e.toString()));
     }

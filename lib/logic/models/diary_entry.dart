@@ -8,4 +8,9 @@ class DiaryEntry {
   
   final DrinkType drinkType;
   final int amount;
+
+  @override
+  String toString() {
+    return 'DiaryEntry{${drinkType.name}, $amount}';
+  }
 }
