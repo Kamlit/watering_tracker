@@ -1,4 +1,4 @@
-import 'package:drink_tracker/logic/blocs/diary/diary_bloc.dart';
+import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/presentation/screens/home/add_entry/add_entry_modal_bottom_sheet.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class AddButton extends StatelessWidget {
       context: context,
       builder: (_) {
         return BlocProvider.value(
-          value: BlocProvider.of<DiaryBloc>(context),
+          value: BlocProvider.of<DiaryCubit>(context),
           child: const AddEntryModalBottomSheet(),
         );
       },

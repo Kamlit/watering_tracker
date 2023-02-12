@@ -37,13 +37,18 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.1
   google_sign_in: ^5.4.3
+  hydrated_bloc: ^9.1.0
   intl: ^0.17.0
+  json_annotation: ^4.8.0
+  path_provider: ^2.0.12
   simple_circular_progress_bar: ^1.0.2
   syncfusion_flutter_charts: ^20.4.44
 
 dev_dependencies:
+  build_runner: null
   flutter_test:
     sdk: flutter
+  json_serializable: ^6.6.1
   very_good_analysis: ^3.1.0
 
 # For information on the generic Dart part of this file, see the
