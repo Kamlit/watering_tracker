@@ -8,8 +8,8 @@ class DayPageCubit extends Cubit<DayPageState> {
   DayPageCubit()
       : super(
           DayPageState(
+            totalAmount: 0,
             entries: const [],
-            page: 1000,
             pageDate: DateTime(
               DateTime.now().year,
               DateTime.now().month,
@@ -18,11 +18,25 @@ class DayPageCubit extends Cubit<DayPageState> {
           ),
         );
 
-  void onDiaryLoaded(List<DiaryEntry> entries) {
-    emit(state.copyWith(entries: entries));
+  void onPageChanged({
+    required DateTime newPageDate,
+    required List<DiaryEntry>? entries,
+  }) {
+
+    emit(
+      state.copyWith(
+        totalAmount: _totalAmount(entries),
+        entries: entries,
+        pageDate: newPageDate,
+      ),
+    );
   }
 
-  void onPageChanged(bool isNextPage){
-    
+  int _totalAmount(List<DiaryEntry>? entries) {
+    var total = 0;
+    for (final element in state.entries) {
+      total += element.amount;
+    }
+    return total;
   }
 }

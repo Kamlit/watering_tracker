@@ -27,6 +27,10 @@ class DiaryCubit extends HydratedCubit<DiaryState> {
     emit(state);
   }
 
+  List<DiaryEntry>? getDiaryEntriesFromDate(DateTime date) {
+    return state.diary![date];
+  }
+
   @override
   DiaryState? fromJson(Map<String, dynamic> json) {
     return DiaryState.fromJson(json);
