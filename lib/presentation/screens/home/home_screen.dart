@@ -38,27 +38,20 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final _pageController = PageController();
-
   void _onPageChanged(int value) {
-    final newPageDate = DateTime(
+    var newPageDate = DateTime(
       DateTime.now().year,
       DateTime.now().month,
       DateTime.now().day,
     ).add(
       Duration(days: -value),
     );
-    final entries =
-        context.watch<DiaryCubit>().getDiaryEntriesFromDate(newPageDate);
-    context
-        .read<DayPageCubit>()
-        .onPageChanged(newPageDate: newPageDate, entries: entries);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
+    var entries =
+        context.read<DiaryCubit>().getDiaryEntriesFromDate(newPageDate);
+    context.read<DayPageCubit>().onPageChanged(
+          newPageDate: newPageDate,
+          entries: entries,
+        );
   }
 
   @override
@@ -71,34 +64,37 @@ class _HomeViewState extends State<HomeView> {
       appBar: const TransparentAppBar(
         height: 80,
       ),
-      body: PageView.builder(
-        reverse: true,
-        onPageChanged: _onPageChanged,
-        controller: _pageController,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Expanded(
-                flex: 6,
-                child: MililitresProgress(
-                  page: index,
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: AddButton(),
-              ),
-              Expanded(
-                flex: 3,
-                child: SemiCircularProgressBar(
-                  size: 32,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              DetailsBottomContainer(),
-            ],
+      body: BlocBuilder<DiaryCubit, DiaryState>(
+        builder: (context, state) {
+          return PageView.builder(
+            reverse: true,
+            onPageChanged: _onPageChanged,
+            itemBuilder: (context, index) {
+              return Column(
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: MililitresProgress(
+                      page: index,
+                    ),
+                  ),
+                  const Expanded(
+                    flex: 3,
+                    child: AddButton(),
+                  ),
+                  const Expanded(
+                    flex: 3,
+                    child: SemiCircularProgressBar(
+                      size: 32,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const DetailsBottomContainer(),
+                ],
+              );
+            },
           );
         },
       ),

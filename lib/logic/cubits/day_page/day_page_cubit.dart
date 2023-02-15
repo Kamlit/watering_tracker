@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
 import 'package:equatable/equatable.dart';
@@ -18,6 +20,12 @@ class DayPageCubit extends Cubit<DayPageState> {
           ),
         );
 
+  void loadEntries({
+    required List<DiaryEntry>? entries,
+  }) {
+    emit(state.copyWith(entries: entries));
+  }
+
   void onPageChanged({
     required DateTime newPageDate,
     required List<DiaryEntry>? entries,
@@ -26,7 +34,7 @@ class DayPageCubit extends Cubit<DayPageState> {
     emit(
       state.copyWith(
         totalAmount: _totalAmount(entries),
-        entries: entries,
+        entries: entries ?? [],
         pageDate: newPageDate,
       ),
     );

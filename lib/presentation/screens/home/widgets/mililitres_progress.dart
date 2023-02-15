@@ -12,28 +12,34 @@ class MililitresProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DayPageCubit, DayPageState>(
-      builder: (context, state) {
-        return Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                state.totalAmount.toString(),
-                style: AppTextStyle.h1White,
-              ),
-              Text(
-                'Goal: 2000 ml',
-                style: AppTextStyle.h3,
-              ),
-              Text(
-                '800 ml left',
-                style: AppTextStyle.h3,
-              ),
-            ],
+    final pageDate = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+    ).add(
+      Duration(days: -page),
+    );
+    final totalAmount =
+        context.read<DiaryCubit>().getTotalAmountFromDate(pageDate);
+        
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            totalAmount.toString(),
+            style: AppTextStyle.h1White,
           ),
-        );
-      },
+          Text(
+            'Goal: 2000 ml',
+            style: AppTextStyle.h3,
+          ),
+          Text(
+            '800 ml left',
+            style: AppTextStyle.h3,
+          ),
+        ],
+      ),
     );
   }
 }

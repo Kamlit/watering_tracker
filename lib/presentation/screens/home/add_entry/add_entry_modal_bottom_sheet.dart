@@ -1,3 +1,4 @@
+import 'package:drink_tracker/logic/cubits/day_page/day_page_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
 import 'package:drink_tracker/logic/models/drink_type.dart';
@@ -21,9 +22,8 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
   late int _amount;
 
   void _addEntry(BuildContext context) {
-    final now = DateTime.now();
     BlocProvider.of<DiaryCubit>(context).addEntry(
-      now,
+      context.read<DayPageCubit>().state.pageDate,
       DiaryEntry(
         drinkType: _drinkType,
         amount: _amount,

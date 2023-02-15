@@ -18,17 +18,29 @@ class DiaryCubit extends HydratedCubit<DiaryState> {
         );
 
   void addEntry(DateTime date, DiaryEntry entry) {
-    if (state.diary!.containsKey(date)) {
-      state.diary![date]!.add(entry);
+    final diary = Map.of(state.diary!);
+    if (diary.containsKey(date)) {
+      diary[date]!.add(entry);
     } else {
-      state.diary![date] = [entry];
+      diary[date] = [entry];
     }
 
-    emit(state);
+    emit(state.copyWith(diary: diary));
   }
 
   List<DiaryEntry>? getDiaryEntriesFromDate(DateTime date) {
     return state.diary![date];
+  }
+
+  int getTotalAmountFromDate(DateTime date) {
+    if (!state.diary!.containsKey(date)) return 0;
+    
+    final entries = List.of(state.diary![date]!);
+    var total = 0;
+    for (final element in entries) {
+      total += element.amount;
+    }
+    return total;
   }
 
   @override
