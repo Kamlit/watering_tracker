@@ -63,10 +63,43 @@ class SemiCirclePainter extends CustomPainter {
         startAngle,
         sweepAngle,
         false,
-        paint..strokeCap = StrokeCap.round,
+        paint..strokeCap = StrokeCap.butt,
       );
       startAngle += _fractionToRad(progressBarFractions[i]);
     }
+  }
+
+  void _paintStartPart(Canvas canvas, Size size) {
+    final offset = Offset(barWidth / 2, size.height - barWidth / 2);
+    final rect = Rect.fromCenter(
+      center: offset,
+      width: barWidth,
+      height: barWidth,
+    );
+    canvas.drawArc(
+      rect,
+      math.pi,
+      -math.pi,
+      true,
+      Paint()..color = progressBarColors.first,
+    );
+  }
+
+  void _paintEndPart(Canvas canvas, Size size) {
+    final offset =
+        Offset(size.width - barWidth / 2, size.height - barWidth / 2);
+    final rect = Rect.fromCenter(
+      center: offset,
+      width: barWidth,
+      height: barWidth,
+    );
+    canvas.drawArc(
+      rect,
+      math.pi,
+      -math.pi,
+      true,
+      Paint()..color = progressBarColors.last,
+    );
   }
 
   @override
@@ -81,9 +114,15 @@ class SemiCirclePainter extends CustomPainter {
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
-
+    // ignore: omit_local_variable_types
+    double fractionsSum = progressBarFractions.fold(
+      0,
+      (previous, current) => previous + current,
+    );
     _paintBackground(canvas, size, offset, rect, paint);
+    _paintStartPart(canvas, size);
     _paintProgress(canvas, size, offset, rect, paint);
+    if (fractionsSum == 1) _paintEndPart(canvas, size);
   }
 
   @override
