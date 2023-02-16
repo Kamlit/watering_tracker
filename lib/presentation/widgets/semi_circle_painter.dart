@@ -15,6 +15,10 @@ class SemiCirclePainter extends CustomPainter {
   final List<double> progressBarFractions;
   final double barWidth;
 
+  bool get _isAnyProgress {
+    return progressBarFractions.isNotEmpty;
+  }
+
   double _degToRad(double degree) {
     return degree * math.pi / 180;
   }
@@ -120,9 +124,11 @@ class SemiCirclePainter extends CustomPainter {
       (previous, current) => previous + current,
     );
     _paintBackground(canvas, size, offset, rect, paint);
-    _paintStartPart(canvas, size);
-    _paintProgress(canvas, size, offset, rect, paint);
-    if (fractionsSum == 1) _paintEndPart(canvas, size);
+    if (_isAnyProgress) {
+      _paintStartPart(canvas, size);
+      _paintProgress(canvas, size, offset, rect, paint);
+      if (fractionsSum == 1) _paintEndPart(canvas, size);
+    }
   }
 
   @override

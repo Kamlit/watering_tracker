@@ -20,6 +20,6 @@ class DrinkType {
 
   @override
   String toString() {
-    return 'DrinkType{$name, $color}';
+    return 'DrinkType{$name}';
   }
 }

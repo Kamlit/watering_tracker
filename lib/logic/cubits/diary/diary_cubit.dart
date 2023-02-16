@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
+import 'package:drink_tracker/logic/models/drink_type.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'dart:convert';
@@ -26,21 +27,6 @@ class DiaryCubit extends HydratedCubit<DiaryState> {
     }
 
     emit(state.copyWith(diary: diary));
-  }
-
-  List<DiaryEntry>? getDiaryEntriesFromDate(DateTime date) {
-    return state.diary![date];
-  }
-
-  int getTotalAmountFromDate(DateTime date) {
-    if (!state.diary!.containsKey(date)) return 0;
-    
-    final entries = List.of(state.diary![date]!);
-    var total = 0;
-    for (final element in entries) {
-      total += element.amount;
-    }
-    return total;
   }
 
   @override
