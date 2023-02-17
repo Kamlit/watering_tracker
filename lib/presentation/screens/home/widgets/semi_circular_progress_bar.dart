@@ -19,31 +19,54 @@ class SemiCircularProgressBar extends StatelessWidget {
   final double size;
   final DateTime pageDate;
 
-  @override
-  Widget build(BuildContext context) {
-    final diaryCubit = context.watch<DiaryCubit>();
-    final goalCubit = context.watch<GoalCubit>();
-    final totalAmount = diaryCubit.state.getTotalAmountFromDate(pageDate);
-    final map = diaryCubit.state.getDrinkTypesTotalAmount(pageDate);
-    List<double> fractions = [];
+  List<double> _getDrinkTypesFractions({
+    required Map<String, int>? map,
+    required int goal,
+    required int totalAmount,
+  }) {
+    var fractions = <double>[];
     if (map != null) {
-      map.entries.forEach((element) {
-        fractions.add(element.value / max(goalCubit.state, totalAmount));
-      });
+      for (var element in map.entries) {
+        fractions.add(element.value / max(goal, totalAmount));
+      }
     }
-    List<Color> drinkTypesColors = [];
+    return fractions;
+  }
+
+  List<Color> _getDrinkTypesColors({
+    required Map<String, int>? map,
+  }) {
+    var colors = <Color>[];
     if (map != null) {
       for (var name in map.keys) {
         for (var drinkType in drinkTypes) {
           if (name == drinkType.name) {
-            drinkTypesColors.add(drinkType.color.toColor());
+            colors.add(drinkType.color.toColor());
           }
         }
       }
     }
-    final percentageProgress =
-        min(((totalAmount / goalCubit.state) * 100).round(), 100);
-    print((totalAmount / goalCubit.state).round());
+    return colors;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final diaryCubit = context.watch<DiaryCubit>();
+    final goalCubit = context.watch<GoalCubit>();
+
+    final totalAmount = diaryCubit.state.getTotalAmountFromDate(pageDate);
+    final drinkTypesTotalAmount =
+        diaryCubit.state.getDrinkTypesTotalAmount(pageDate);
+    final drinkTypesFractions = _getDrinkTypesFractions(
+      map: drinkTypesTotalAmount,
+      goal: goalCubit.state,
+      totalAmount: totalAmount,
+    );
+    final drinkTypesColors = _getDrinkTypesColors(
+      map: drinkTypesTotalAmount,
+    );
+    final percentageProgress = ((totalAmount / goalCubit.state) * 100).round();
+
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -53,7 +76,7 @@ class SemiCircularProgressBar extends StatelessWidget {
             painter: SemiCirclePainter(
               backgroundColor: AppColors.greyDark,
               progressBarColors: drinkTypesColors,
-              progressBarFractions: fractions,
+              progressBarFractions: drinkTypesFractions,
               barWidth: 20,
             ),
           ),

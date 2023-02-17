@@ -43,7 +43,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   void _onPageChanged(int page) {
     var newPageDate = DateHelper.getDateFromPage(page);
     context.read<PageDateCubit>().onPageChanged(
