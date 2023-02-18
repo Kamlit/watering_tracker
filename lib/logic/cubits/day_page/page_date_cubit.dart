@@ -17,10 +17,9 @@ class PageDateCubit extends Cubit<PageDateState> {
         );
 
 
-  void onPageChanged({
+  void pageChanged({
     required DateTime newPageDate,
   }) {
-
     emit(
       state.copyWith(
         pageDate: newPageDate,

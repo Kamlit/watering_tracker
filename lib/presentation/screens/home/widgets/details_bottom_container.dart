@@ -3,33 +3,30 @@ import 'package:flutter/material.dart';
 
 class DetailsBottomContainer extends StatelessWidget {
   const DetailsBottomContainer({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Container(
-      width: double.infinity,
-      height: 60,
+      width: width,
+      height: height - 80,
       decoration: const BoxDecoration(
         color: AppColors.dark,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(25),
         ),
       ),
-      child: Row(
-        
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
         children: const [
           Icon(
-            Icons.arrow_drop_down,
-            color: Colors.white,
+            Icons.arrow_drop_up_sharp,
+            color: AppColors.white,
           ),
           Text(
             'Details',
             style: AppTextStyle.h2,
-          ),
-          Icon(
-            Icons.arrow_drop_down,
-            color: Colors.white,
           ),
         ],
       ),
