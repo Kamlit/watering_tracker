@@ -14,9 +14,11 @@ DiaryState _$DiaryStateFromJson(Map<String, dynamic> json) => DiaryState(
                 .map((e) => DiaryEntry.fromJson(e as Map<String, dynamic>))
                 .toList()),
       ),
+      goal: json['goal'] as int,
     );
 
 Map<String, dynamic> _$DiaryStateToJson(DiaryState instance) =>
     <String, dynamic>{
       'diary': instance.diary?.map((k, e) => MapEntry(k.toIso8601String(), e)),
+      'goal': instance.goal,
     };

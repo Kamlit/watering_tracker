@@ -30,34 +30,24 @@ class DetailsBottomContainer extends StatelessWidget {
         children: [
           SizedBox(
             height: topPartHeight,
-            child: BlocBuilder<DetailsCubit, DetailsState>(
-              builder: (context, state) {
-                return state == DetailsHidden() ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.arrow_drop_up_sharp,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BlocBuilder<DetailsCubit, DetailsState>(
+                  builder: (context, state) {
+                    return Icon(
+                      state == DetailsHidden()
+                          ? Icons.arrow_drop_up
+                          : Icons.arrow_drop_down,
                       color: AppColors.white,
-                    ),
-                    Text(
-                      'Details',
-                      style: AppTextStyle.h2,
-                    ),
-                  ],
-                ) :  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.arrow_drop_down_sharp,
-                      color: AppColors.white,
-                    ),
-                    Text(
-                      'Details',
-                      style: AppTextStyle.h2,
-                    ),
-                  ],
-                );
-              },
+                    );
+                  },
+                ),
+                const Text(
+                  'Details',
+                  style: AppTextStyle.h2,
+                ),
+              ],
             ),
           ),
           const Expanded(

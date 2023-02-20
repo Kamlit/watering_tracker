@@ -27,9 +27,6 @@ class HomeScreen extends StatelessWidget {
           create: (_) => PageDateCubit(),
         ),
         BlocProvider(
-          create: (_) => GoalCubit(),
-        ),
-        BlocProvider(
           create: (_) => DetailsCubit(),
         ),
       ],
@@ -90,7 +87,6 @@ class _HomeViewState extends State<HomeView> {
     return MediaQuery.of(context).size.width;
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,12 +104,14 @@ class _HomeViewState extends State<HomeView> {
               onPageChanged: _onPageChanged,
               itemBuilder: (context, page) {
                 final pageDate = DateHelper.getDateFromPage(page);
+                final diaryData =
+                    context.watch<DiaryCubit>().state.getDiaryData(pageDate);
                 return Column(
                   children: [
                     Expanded(
                       flex: 6,
                       child: MililitresProgress(
-                        pageDate: pageDate,
+                        data: diaryData,
                       ),
                     ),
                     const Expanded(
@@ -124,7 +122,7 @@ class _HomeViewState extends State<HomeView> {
                       flex: 3,
                       child: SemiCircularProgressBar(
                         size: 32,
-                        pageDate: pageDate,
+                        data: diaryData,
                       ),
                     ),
                     const SizedBox(
