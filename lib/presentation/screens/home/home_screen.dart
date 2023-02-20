@@ -80,6 +80,17 @@ class _HomeViewState extends State<HomeView> {
 
   final double _appDrawerHeight = 70;
 
+  double get _detailsHeight {
+    return MediaQuery.of(context).size.height -
+        _appDrawerHeight -
+        MediaQuery.of(context).viewPadding.top;
+  }
+
+  double get _detailsWidth {
+    return MediaQuery.of(context).size.width;
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,9 +98,7 @@ class _HomeViewState extends State<HomeView> {
       drawerEnableOpenDragGesture: false,
       backgroundColor: AppColors.backgroundColor,
       drawer: const AppDrawer(),
-      appBar: TransparentAppBar(
-        height: _appDrawerHeight,
-      ),
+      appBar: TransparentAppBar(height: _appDrawerHeight),
       body: GestureDetector(
         onPanEnd: _onPanEnd,
         child: Stack(
@@ -130,14 +139,16 @@ class _HomeViewState extends State<HomeView> {
                 return AnimatedPositioned(
                   curve: Curves.easeOut,
                   duration: const Duration(milliseconds: 300),
-                  left: 0,
                   bottom: state == DetailsOpen()
                       ? 0
-                      : -MediaQuery.of(context).size.height +
-                          _appDrawerHeight * 2,
+                      : -_detailsHeight + _appDrawerHeight,
                   child: GestureDetector(
                     onTap: () => _onDetailsTap(state),
-                    child: const DetailsBottomContainer(),
+                    child: DetailsBottomContainer(
+                      height: _detailsHeight,
+                      width: _detailsWidth,
+                      topPartHeight: _appDrawerHeight,
+                    ),
                   ),
                 );
               },

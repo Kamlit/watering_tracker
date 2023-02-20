@@ -1,17 +1,25 @@
+import 'package:drink_tracker/logic/cubits/details_cubit.dart/details_cubit.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DetailsBottomContainer extends StatelessWidget {
-  const DetailsBottomContainer({super.key});
+  const DetailsBottomContainer({
+    required this.height,
+    required this.width,
+    required this.topPartHeight,
+    super.key,
+  });
+
+  final double height;
+  final double width;
+  final double topPartHeight;
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
     return Container(
       width: width,
-      height: height - 80,
+      height: height,
       decoration: const BoxDecoration(
         color: AppColors.dark,
         borderRadius: BorderRadius.vertical(
@@ -19,14 +27,41 @@ class DetailsBottomContainer extends StatelessWidget {
         ),
       ),
       child: Column(
-        children: const [
-          Icon(
-            Icons.arrow_drop_up_sharp,
-            color: AppColors.white,
+        children: [
+          SizedBox(
+            height: topPartHeight,
+            child: BlocBuilder<DetailsCubit, DetailsState>(
+              builder: (context, state) {
+                return state == DetailsHidden() ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.arrow_drop_up_sharp,
+                      color: AppColors.white,
+                    ),
+                    Text(
+                      'Details',
+                      style: AppTextStyle.h2,
+                    ),
+                  ],
+                ) :  Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.arrow_drop_down_sharp,
+                      color: AppColors.white,
+                    ),
+                    Text(
+                      'Details',
+                      style: AppTextStyle.h2,
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
-          Text(
-            'Details',
-            style: AppTextStyle.h2,
+          const Expanded(
+            child: SizedBox(),
           ),
         ],
       ),
