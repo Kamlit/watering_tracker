@@ -22,35 +22,30 @@ class SemiCircularProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiaryCubit, DiaryState>(
-      builder: (context, state) {
-
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              child: CustomPaint(
-                size: Size(size * 10, size / 2 * 10),
-                painter: SemiCirclePainter(
-                  backgroundColor: AppColors.greyDark,
-                  progressBarColors: data.drinkTypesColors,
-                  progressBarFractions: data.drinkTypesFractions,
-                  barWidth: 20,
-                ),
-              ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Positioned(
+          child: CustomPaint(
+            size: Size(size * 10, size / 2 * 10),
+            painter: SemiCirclePainter(
+              backgroundColor: AppColors.greyDark,
+              progressBarColors: data.drinkTypesColors,
+              progressBarFractions: data.drinkTypesFractions,
+              barWidth: 20,
             ),
-            Positioned.fill(
-              top: 50,
-              child: Center(
-                child: Text(
-                  '${data.goalPercentage}%',
-                  style: AppTextStyle.h1Grey,
-                ),
-              ),
-            )
-          ],
-        );
-      },
+          ),
+        ),
+        Positioned.fill(
+          top: 50,
+          child: Center(
+            child: Text(
+              '${data.goalPercentage}%',
+              style: AppTextStyle.h1Grey,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

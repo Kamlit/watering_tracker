@@ -10,8 +10,9 @@ class DiaryEntry {
     required this.amount,
   });
 
-  factory DiaryEntry.fromJson(Map<String, dynamic> json) => _$DiaryEntryFromJson(json);
-  
+  factory DiaryEntry.fromJson(Map<String, dynamic> json) =>
+      _$DiaryEntryFromJson(json);
+
   final DrinkType drinkType;
   final int amount;
 

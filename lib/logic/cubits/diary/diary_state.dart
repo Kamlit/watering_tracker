@@ -65,60 +65,60 @@ class DiaryState {
     }
   }
 
-  List<DiaryEntry>? _getDiaryEntriesFromDate(DateTime date) {
-    return diary![date];
-  }
+  // List<DiaryEntry>? _getDiaryEntriesFromDate(DateTime date) {
+  //   return diary![date];
+  // }
 
-  int _getTotalAmountFromDate(DateTime date) {
-    if (!diary!.containsKey(date)) return 0;
+  // int _getTotalAmountFromDate(DateTime date) {
+  //   if (!diary!.containsKey(date)) return 0;
 
-    final entries = List.of(diary![date] ?? <DiaryEntry>[]);
-    var total = 0;
-    return 0;
-  }
+  //   final entries = List.of(diary![date] ?? <DiaryEntry>[]);
+  //   var total = 0;
+  //   return 0;
+  // }
 
-  Map<String, int>? _getDrinkTypesTotalAmount(DateTime date) {
-    final entries = diary![date];
-    if (entries == null) return null;
-    var map = <String, int>{};
-    for (var element in entries) {
-      if (map.containsKey(element.drinkType.name)) {
-        map[element.drinkType.name] =
-            element.amount + map[element.drinkType.name]!;
-      } else {
-        map[element.drinkType.name] = element.amount;
-      }
-    }
+  // Map<String, int>? _getDrinkTypesTotalAmount(DateTime date) {
+  //   final entries = diary![date];
+  //   if (entries == null) return null;
+  //   var map = <String, int>{};
+  //   for (var element in entries) {
+  //     if (map.containsKey(element.drinkType.name)) {
+  //       map[element.drinkType.name] =
+  //           element.amount + map[element.drinkType.name]!;
+  //     } else {
+  //       map[element.drinkType.name] = element.amount;
+  //     }
+  //   }
 
-    return map;
-  }
+  //   return map;
+  // }
 
-  List<double> _getDrinkTypesFractions({
-    required Map<String, int>? map,
-    required int totalAmount,
-  }) {
-    var fractions = <double>[];
-    if (map != null) {
-      for (var element in map.entries) {
-        fractions.add(element.value / max(goal, totalAmount));
-      }
-    }
-    return fractions;
-  }
+  // List<double> _getDrinkTypesFractions({
+  //   required Map<String, int>? map,
+  //   required int totalAmount,
+  // }) {
+  //   var fractions = <double>[];
+  //   if (map != null) {
+  //     for (var element in map.entries) {
+  //       fractions.add(element.value / max(goal, totalAmount));
+  //     }
+  //   }
+  //   return fractions;
+  // }
 
-  List<Color> _getDrinkTypesColors({
-    required Map<String, int>? map,
-  }) {
-    var colors = <Color>[];
-    if (map != null) {
-      for (var name in map.keys) {
-        for (var drinkType in drinkTypes) {
-          if (name == drinkType.name) {
-            colors.add(drinkType.color.toColor());
-          }
-        }
-      }
-    }
-    return colors;
-  }
+  // List<Color> _getDrinkTypesColors({
+  //   required Map<String, int>? map,
+  // }) {
+  //   var colors = <Color>[];
+  //   if (map != null) {
+  //     for (var name in map.keys) {
+  //       for (var drinkType in drinkTypes) {
+  //         if (name == drinkType.name) {
+  //           colors.add(drinkType.color.toColor());
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return colors;
+  // }
 }
