@@ -1,5 +1,5 @@
 import 'package:drink_tracker/logic/models/diary_data.dart';
-import 'package:drink_tracker/presentation/screens/home/details_bottom_container/percentage_bar_tile.dart';
+import 'package:drink_tracker/presentation/screens/home/bottom_card/percentage_bar_tile.dart';
 import 'package:flutter/material.dart';
 
 class DetailsPage extends StatelessWidget {

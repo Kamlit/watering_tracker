@@ -5,7 +5,7 @@ import 'package:drink_tracker/logic/helpers/date_helper.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/presentation/drawer/app_drawer.dart';
 import 'package:drink_tracker/presentation/screens/home/widgets/add_button.dart';
-import 'package:drink_tracker/presentation/screens/home/details_bottom_container/details_bottom_container.dart';
+import 'package:drink_tracker/presentation/screens/home/bottom_card/bottom_card.dart';
 import 'package:drink_tracker/presentation/screens/home/widgets/mililitres_progress.dart';
 import 'package:drink_tracker/presentation/screens/home/widgets/semi_circular_progress_bar.dart';
 import 'package:drink_tracker/presentation/style.dart';
@@ -209,7 +209,7 @@ class _HomeViewState extends State<HomeView> {
                       : -_detailsHeight + _detailsTopPartHeight,
                   child: GestureDetector(
                     onTap: () => _onDetailsTap(state),
-                    child: DetailsBottomContainer(
+                    child: BottomCard(
                       width: _detailsWidth,
                       height: _detailsHeight,
                       topPartHeight: _detailsTopPartHeight,

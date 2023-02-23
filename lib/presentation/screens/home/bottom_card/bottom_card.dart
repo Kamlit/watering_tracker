@@ -2,16 +2,16 @@ import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/logic/cubits/details_cubit.dart/details_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
-import 'package:drink_tracker/presentation/screens/home/details_bottom_container/details_page.dart';
-import 'package:drink_tracker/presentation/screens/home/details_bottom_container/history_page.dart';
-import 'package:drink_tracker/presentation/screens/home/details_bottom_container/percentage_bar_tile.dart';
+import 'package:drink_tracker/presentation/screens/home/bottom_card/details_page.dart';
+import 'package:drink_tracker/presentation/screens/home/bottom_card/history_page.dart';
+import 'package:drink_tracker/presentation/screens/home/bottom_card/percentage_bar_tile.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:drink_tracker/presentation/widgets/percentage_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DetailsBottomContainer extends StatefulWidget {
-  const DetailsBottomContainer({
+class BottomCard extends StatefulWidget {
+  const BottomCard({
     required this.width,
     required this.height,
     required this.topPartHeight,
@@ -23,10 +23,10 @@ class DetailsBottomContainer extends StatefulWidget {
   final double topPartHeight;
 
   @override
-  State<DetailsBottomContainer> createState() => _DetailsBottomContainerState();
+  State<BottomCard> createState() => _BottomCardState();
 }
 
-class _DetailsBottomContainerState extends State<DetailsBottomContainer> {
+class _BottomCardState extends State<BottomCard> {
   final PageController _pageController = PageController(initialPage: 1000);
 
   @override
