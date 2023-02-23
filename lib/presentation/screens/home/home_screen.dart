@@ -1,5 +1,5 @@
+import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
-import 'package:drink_tracker/logic/cubits/details_cubit.dart/details_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/helpers/date_helper.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
           create: (_) => PageDateCubit(),
         ),
         BlocProvider(
-          create: (_) => DetailsCubit(),
+          create: (_) => BottomCardCubit(),
         ),
       ],
       child: const HomeView(),
@@ -52,7 +52,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     _pageController.addListener(() {
-      print(_pageController.page);
       if (_pageController.page!.round() == _pageController.page) {
         context.read<PageDateCubit>().pageChanged();
       }
@@ -67,28 +66,28 @@ class _HomeViewState extends State<HomeView> {
         );
   }
 
-  void _openDetails() {
-    context.read<DetailsCubit>().openDetails();
+  void _openBottomCard() {
+    context.read<BottomCardCubit>().openBottomCard();
   }
 
-  void _hideDetails() {
-    context.read<DetailsCubit>().hideDetails();
+  void _hideBottomCard() {
+    context.read<BottomCardCubit>().hideBottomCard();
   }
 
-  void _onDetailsTap(DetailsState state) {
-    if (state == DetailsOpen()) {
-      _hideDetails();
+  void _onBottomCardTap(BottomCardState state) {
+    if (state == BottomCardOpen()) {
+      _hideBottomCard();
     } else {
-      _openDetails();
+      _openBottomCard();
     }
   }
 
   void _onPanEnd(DragEndDetails details) {
     if (details.velocity.pixelsPerSecond.dy > 500) {
-      _hideDetails();
+      _hideBottomCard();
     }
     if (details.velocity.pixelsPerSecond.dy < -500) {
-      _openDetails();
+      _openBottomCard();
     }
   }
 
@@ -150,65 +149,16 @@ class _HomeViewState extends State<HomeView> {
                 );
               },
             ),
-            // SizedBox(
-            //   height: 70,
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: InkWell(
-            //           child: Container(
-            //             margin: EdgeInsets.all(4),
-            //             decoration: const BoxDecoration(
-            //               color: AppColors.dark,
-            //               borderRadius: BorderRadius.all(
-            //                 Radius.circular(25),
-            //               ),
-            //             ),
-            //             child: Center(
-            //               child: const Text(
-            //                 'Details',
-            //                 style: AppTextStyle.h2,
-            //               ),
-            //             ),
-            //           ),
-            //           onTap: () {
-            //             _openDetails();
-            //           },
-            //         ),
-            //       ),
-            //       Expanded(
-            //         child: InkWell(
-            //           child: Container(
-            //             margin: EdgeInsets.all(4),
-            //             decoration: const BoxDecoration(
-            //               color: AppColors.dark,
-            //               borderRadius: BorderRadius.all(
-            //                 Radius.circular(25),
-            //               ),
-            //             ),
-            //             child: Center(
-            //               child: const Text(
-            //                 'History',
-            //                 style: AppTextStyle.h2,
-            //               ),
-            //             ),
-            //           ),
-            //           onTap: () {},
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            BlocBuilder<DetailsCubit, DetailsState>(
+            BlocBuilder<BottomCardCubit, BottomCardState>(
               builder: (context, state) {
                 return AnimatedPositioned(
                   curve: Curves.easeOut,
                   duration: const Duration(milliseconds: 300),
-                  bottom: state == DetailsOpen()
+                  bottom: state == BottomCardOpen()
                       ? 0
                       : -_detailsHeight + _detailsTopPartHeight,
                   child: GestureDetector(
-                    onTap: () => _onDetailsTap(state),
+                    onTap: () => _onBottomCardTap(state),
                     child: BottomCard(
                       width: _detailsWidth,
                       height: _detailsHeight,
@@ -218,23 +168,6 @@ class _HomeViewState extends State<HomeView> {
                 );
               },
             ),
-            // BlocBuilder<DetailsCubit, DetailsState>(
-            //   builder: (context, state) {
-            //     return AnimatedPositioned(
-            //       curve: Curves.easeOut,
-            //       duration: const Duration(milliseconds: 300),
-            //       bottom: state == DetailsOpen() ? 0 : -_detailsHeight,
-            //       child: GestureDetector(
-            //         onTap: () => _onDetailsTap(state),
-            //         child: DetailsBottomContainer(
-            //           width: _detailsWidth,
-            //           height: _detailsHeight,
-            //           topPartHeight: _detailsTopPartHeight,
-            //         ),
-            //       ),
-            //     );
-            //   },
-            // ),
           ],
         ),
       ),

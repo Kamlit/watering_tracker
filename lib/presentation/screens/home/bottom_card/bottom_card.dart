@@ -1,6 +1,6 @@
 import 'package:drink_tracker/TEMP_drink_types.dart';
+import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
-import 'package:drink_tracker/logic/cubits/details_cubit.dart/details_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/presentation/screens/home/bottom_card/details_page.dart';
 import 'package:drink_tracker/presentation/screens/home/bottom_card/history_page.dart';
@@ -44,9 +44,9 @@ class _BottomCardState extends State<BottomCard> {
         children: [
           SizedBox(
             height: widget.topPartHeight,
-            child: BlocBuilder<DetailsCubit, DetailsState>(
+            child: BlocBuilder<BottomCardCubit, BottomCardState>(
               builder: (context, state) {
-                if (state == DetailsOpen()) {
+                if (state == BottomCardOpen()) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
