@@ -47,9 +47,22 @@ class _HomeViewState extends State<HomeView> {
   final double _appBarHeight = 70;
   final double _detailsTopPartHeight = 70;
 
+  final PageController _pageController = PageController();
+
+  @override
+  void initState() {
+    _pageController.addListener(() {
+      print(_pageController.page);
+      if (_pageController.page!.round() == _pageController.page) {
+        context.read<PageDateCubit>().pageChanged();
+      }
+    });
+    super.initState();
+  }
+
   void _onPageChanged(int page) {
     var newPageDate = DateHelper.getDateFromPage(page);
-    context.read<PageDateCubit>().pageChanged(
+    context.read<PageDateCubit>().pageChanging(
           newPageDate: newPageDate,
         );
   }
@@ -93,7 +106,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    print('rebuild');
     return Scaffold(
       resizeToAvoidBottomInset: false,
       drawerEnableOpenDragGesture: false,
@@ -105,6 +117,7 @@ class _HomeViewState extends State<HomeView> {
         child: Stack(
           children: [
             PageView.builder(
+              controller: _pageController,
               reverse: true,
               onPageChanged: _onPageChanged,
               itemBuilder: (context, page) {

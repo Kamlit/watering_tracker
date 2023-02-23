@@ -8,6 +8,7 @@ class PageDateCubit extends Cubit<PageDateState> {
   PageDateCubit()
       : super(
           PageDateState(
+            status: PageDateStatus.changed,
             pageDate: DateTime(
               DateTime.now().year,
               DateTime.now().month,
@@ -17,15 +18,22 @@ class PageDateCubit extends Cubit<PageDateState> {
         );
 
 
-  void pageChanged({
+  void pageChanging({
     required DateTime newPageDate,
   }) {
     emit(
       state.copyWith(
+        status: PageDateStatus.changing,
         pageDate: newPageDate,
       ),
     );
   }
 
-  
+  void pageChanged() {
+    emit(
+      state.copyWith(
+        status: PageDateStatus.changed,
+      ),
+    );
+  }
 }
