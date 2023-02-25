@@ -1,6 +1,5 @@
 import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
-import 'package:drink_tracker/logic/cubits/bottom_card_page/bottom_card_page_cubit.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
@@ -36,7 +35,7 @@ class _BottomCardState extends State<BottomCard> {
   void _onPageChanged(int page) {
     var newPage =
         page.isEven ? BottomCardPage.details : BottomCardPage.history;
-    context.read<BottomCardPageCubit>().changePage(newPage);
+    context.read<BottomCardCubit>().changePage(newPage);
   }
 
   @override
@@ -64,7 +63,7 @@ class _BottomCardState extends State<BottomCard> {
                         Icons.arrow_left,
                         color: AppColors.white,
                       ),
-                      BlocBuilder<BottomCardPageCubit, BottomCardPageState>(
+                      BlocBuilder<BottomCardCubit, BottomCardState>(
                         builder: (context, state) {
                           return Text(
                             state.page == BottomCardPage.details
@@ -88,7 +87,7 @@ class _BottomCardState extends State<BottomCard> {
                         Icons.arrow_drop_up,
                         color: AppColors.white,
                       ),
-                      BlocBuilder<BottomCardPageCubit, BottomCardPageState>(
+                      BlocBuilder<BottomCardCubit, BottomCardState>(
                         builder: (context, state) {
                           return Text(
                             state.page == BottomCardPage.details

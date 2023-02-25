@@ -7,18 +7,27 @@ part 'bottom_card_state.dart';
 class BottomCardCubit extends Cubit<BottomCardState> {
   BottomCardCubit()
       : super(
-          const BottomCardState(status: BottomCardStatus.close),
+          const BottomCardState(
+            status: BottomCardStatus.close,
+            page: BottomCardPage.details,
+          ),
         );
 
   void openBottomCard() {
     emit(
-      const BottomCardState(status: BottomCardStatus.open),
+      state.copyWith(status: BottomCardStatus.open),
     );
   }
 
-  void hideBottomCard() {
+  void closeBottomCard() {
     emit(
-      const BottomCardState(status: BottomCardStatus.close),
+      state.copyWith(status: BottomCardStatus.close),
+    );
+  }
+
+  void changePage(BottomCardPage newPage) {
+    emit(
+      state.copyWith(page: newPage),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
-import 'package:drink_tracker/logic/cubits/bottom_card_page/bottom_card_page_cubit.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/helpers/date_helper.dart';
@@ -31,9 +30,6 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(
           create: (_) => BottomCardCubit(),
         ),
-        BlocProvider(
-          create: (_) => BottomCardPageCubit(),
-        ),
       ],
       child: const HomeView(),
     );
@@ -51,17 +47,6 @@ class _HomeViewState extends State<HomeView> {
   final double _appBarHeight = 70;
   final double _bottomCardTopPartHeight = 70;
   DiaryData _currentData = DiaryData.empty();
-  final PageController _pageController = PageController();
-
-  @override
-  void initState() {
-    _pageController.addListener(() {
-      if (_pageController.page!.round() == _pageController.page) {
-        context.read<PageDateCubit>().pageChanged();
-      }
-    });
-    super.initState();
-  }
 
   void _onPageChanged(int page) {
     var newPageDate = DateHelper.getDateFromPage(page);
@@ -74,13 +59,13 @@ class _HomeViewState extends State<HomeView> {
     context.read<BottomCardCubit>().openBottomCard();
   }
 
-  void _hideBottomCard() {
-    context.read<BottomCardCubit>().hideBottomCard();
+  void _closeBottomCard() {
+    context.read<BottomCardCubit>().closeBottomCard();
   }
 
   void _onBottomCardTap(BottomCardState state) {
     if (state.status == BottomCardStatus.open) {
-      _hideBottomCard();
+      _closeBottomCard();
     } else {
       _openBottomCard();
     }
@@ -88,7 +73,7 @@ class _HomeViewState extends State<HomeView> {
 
   void _onPanEnd(DragEndDetails details) {
     if (details.velocity.pixelsPerSecond.dy > 500) {
-      _hideBottomCard();
+      _closeBottomCard();
     }
     if (details.velocity.pixelsPerSecond.dy < -500) {
       _openBottomCard();
@@ -120,7 +105,6 @@ class _HomeViewState extends State<HomeView> {
         child: Stack( 
           children: [
             PageView.builder(
-              controller: _pageController,
               reverse: true,
               onPageChanged: _onPageChanged,
               itemBuilder: (context, page) {
