@@ -1,14 +1,7 @@
-import 'dart:math';
-
-import 'package:drink_tracker/TEMP_drink_types.dart';
-import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
-import 'package:drink_tracker/logic/cubits/goal/goal_cubit.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:drink_tracker/presentation/widgets/semi_circle_painter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:drink_tracker/logic/helpers/extensions.dart';
 
 class SemiCircularProgressBar extends StatelessWidget {
   const SemiCircularProgressBar({

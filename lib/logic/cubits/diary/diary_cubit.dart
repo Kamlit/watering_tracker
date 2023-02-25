@@ -1,16 +1,11 @@
 import 'dart:math';
 
-import 'package:bloc/bloc.dart';
 import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/helpers/extensions.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
-import 'package:drink_tracker/logic/models/drink_type.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'diary_state.dart';

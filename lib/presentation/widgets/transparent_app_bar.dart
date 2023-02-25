@@ -1,6 +1,5 @@
 import 'package:drink_tracker/presentation/widgets/day_title.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class TransparentAppBar extends StatefulWidget implements PreferredSizeWidget {
   const TransparentAppBar({super.key, required this.height});

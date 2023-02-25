@@ -1,4 +1,3 @@
-import 'package:drink_tracker/TEMP_drink_types.dart';
 import 'package:drink_tracker/logic/models/diary_entry.dart';
 
 class DiaryRepository {

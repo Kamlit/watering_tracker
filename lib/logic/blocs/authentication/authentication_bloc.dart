@@ -7,7 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'authentication_state.dart';
 part 'authentication_event.dart';
 
-class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
+class AuthenticationBloc
+    extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationBloc({
     required this.authorizationRepository,
   }) : super(AuthenticationUninitialized()) {
@@ -31,7 +32,6 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     } else {
       emit(Unauthenticated());
     }
-    print(isUserLogged);
   }
 
   Future<void> _onSignInRequested(

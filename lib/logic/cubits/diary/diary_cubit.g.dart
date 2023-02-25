@@ -9,10 +9,11 @@ part of 'diary_cubit.dart';
 DiaryState _$DiaryStateFromJson(Map<String, dynamic> json) => DiaryState(
       diary: (json['diary'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(
-            DateTime.parse(k),
-            (e as List<dynamic>)
-                .map((e) => DiaryEntry.fromJson(e as Map<String, dynamic>))
-                .toList()),
+          DateTime.parse(k),
+          (e as List<dynamic>)
+              .map((e) => DiaryEntry.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        ),
       ),
       goal: json['goal'] as int,
     );
