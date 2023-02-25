@@ -1,14 +1,21 @@
 part of 'bottom_card_cubit.dart';
 
+enum BottomCardStatus { open, close }
+
 @immutable
-abstract class BottomCardState extends Equatable {}
+class BottomCardState extends Equatable {
+  const BottomCardState({required this.status});
 
-class BottomCardOpen extends BottomCardState {
-  @override
-  List<Object?> get props => [];
-}
+  final BottomCardStatus status;
 
-class BottomCardHidden extends BottomCardState {
+  BottomCardState copyWith({
+    BottomCardStatus? status,
+  }) {
+    return BottomCardState(
+      status: status ?? this.status,
+    );
+  }
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [status];
 }

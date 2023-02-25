@@ -5,13 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'bottom_card_state.dart';
 
 class BottomCardCubit extends Cubit<BottomCardState> {
-  BottomCardCubit() : super(BottomCardHidden());
+  BottomCardCubit()
+      : super(
+          const BottomCardState(status: BottomCardStatus.close),
+        );
 
   void openBottomCard() {
-    emit(BottomCardOpen());
+    emit(
+      const BottomCardState(status: BottomCardStatus.open),
+    );
   }
 
   void hideBottomCard() {
-    emit(BottomCardHidden());
+    emit(
+      const BottomCardState(status: BottomCardStatus.close),
+    );
   }
 }

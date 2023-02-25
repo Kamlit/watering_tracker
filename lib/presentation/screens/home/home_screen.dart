@@ -1,4 +1,5 @@
 import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
+import 'package:drink_tracker/logic/cubits/bottom_card_page/bottom_card_page_cubit.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/helpers/date_helper.dart';
@@ -30,6 +31,9 @@ class HomeScreen extends StatelessWidget {
         BlocProvider(
           create: (_) => BottomCardCubit(),
         ),
+        BlocProvider(
+          create: (_) => BottomCardPageCubit(),
+        ),
       ],
       child: const HomeView(),
     );
@@ -45,8 +49,8 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final double _appBarHeight = 70;
-  final double _detailsTopPartHeight = 70;
-
+  final double _bottomCardTopPartHeight = 70;
+  DiaryData _currentData = DiaryData.empty();
   final PageController _pageController = PageController();
 
   @override
@@ -75,7 +79,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   void _onBottomCardTap(BottomCardState state) {
-    if (state == BottomCardOpen()) {
+    if (state.status == BottomCardStatus.open) {
       _hideBottomCard();
     } else {
       _openBottomCard();
@@ -95,11 +99,11 @@ class _HomeViewState extends State<HomeView> {
     return MediaQuery.of(context).viewPadding.top;
   }
 
-  double get _detailsWidth {
+  double get _bottomCardWidth {
     return MediaQuery.of(context).size.width;
   }
 
-  double get _detailsHeight {
+  double get _bottomCardHeight {
     return MediaQuery.of(context).size.height - _appBarHeight - _topViewPadding;
   }
 
@@ -113,7 +117,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: TransparentAppBar(height: _appBarHeight),
       body: GestureDetector(
         onPanEnd: _onPanEnd,
-        child: Stack(
+        child: Stack( 
           children: [
             PageView.builder(
               controller: _pageController,
@@ -123,6 +127,7 @@ class _HomeViewState extends State<HomeView> {
                 final pageDate = DateHelper.getDateFromPage(page);
                 final diaryData =
                     context.watch<DiaryCubit>().state.getDiaryData(pageDate);
+                _currentData = diaryData;
                 return Column(
                   children: [
                     Expanded(
@@ -143,7 +148,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                     SizedBox(
-                      height: _detailsTopPartHeight,
+                      height: _bottomCardTopPartHeight,
                     ),
                   ],
                 );
@@ -154,15 +159,16 @@ class _HomeViewState extends State<HomeView> {
                 return AnimatedPositioned(
                   curve: Curves.easeOut,
                   duration: const Duration(milliseconds: 300),
-                  bottom: state == BottomCardOpen()
-                      ? 0
-                      : -_detailsHeight + _detailsTopPartHeight,
+                  bottom: state.status == BottomCardStatus.close 
+                      ? -_bottomCardHeight + _bottomCardTopPartHeight
+                      : 0,
                   child: GestureDetector(
                     onTap: () => _onBottomCardTap(state),
                     child: BottomCard(
-                      width: _detailsWidth,
-                      height: _detailsHeight,
-                      topPartHeight: _detailsTopPartHeight,
+                      data: _currentData,
+                      width: _bottomCardWidth,
+                      height: _bottomCardHeight,
+                      topPartHeight: _bottomCardTopPartHeight,
                     ),
                   ),
                 );
