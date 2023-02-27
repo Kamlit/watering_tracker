@@ -45,7 +45,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final double _appBarHeight = 70;
   final double _bottomCardTopPartHeight = 70;
-  DiaryData _currentData = DiaryData.empty();
 
   void _onPageChanged(int page) {
     var newPageDate = DateHelper.getDateFromPage(page);
@@ -101,63 +100,66 @@ class _HomeViewState extends State<HomeView> {
       appBar: TransparentAppBar(height: _appBarHeight),
       body: GestureDetector(
         onPanEnd: _onPanEnd,
-        child: Stack( 
-          children: [
-            PageView.builder(
+        child: Builder(
+          builder: (context) {
+            final diaryState = context.watch<DiaryCubit>().state;
+            final bottomCardState = context.watch<BottomCardCubit>().state;
+            return PageView.builder(
+              physics: bottomCardState.status == BottomCardStatus.open
+                  ? const NeverScrollableScrollPhysics()
+                  : const AlwaysScrollableScrollPhysics(),
               reverse: true,
               onPageChanged: _onPageChanged,
               itemBuilder: (context, page) {
                 final pageDate = DateHelper.getDateFromPage(page);
-                final diaryData =
-                    context.watch<DiaryCubit>().state.getDiaryData(pageDate);
-                _currentData = diaryData;
-                return Column(
+                final diaryData = diaryState.getDiaryData(pageDate);
+                return Stack(
                   children: [
-                    Expanded(
-                      flex: 6,
-                      child: MililitresProgress(
-                        data: diaryData,
+                    Column(
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: MililitresProgress(
+                            data: diaryData,
+                          ),
+                        ),
+                        const Expanded(
+                          flex: 3,
+                          child: AddButton(),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: SemiCircularProgressBar(
+                            size: 32,
+                            data: diaryData,
+                          ),
+                        ),
+                        SizedBox(
+                          height: _bottomCardTopPartHeight,
+                        ),
+                      ],
+                    ),
+                    AnimatedPositioned(
+                      curve: Curves.easeOut,
+                      duration: const Duration(milliseconds: 300),
+                      bottom: bottomCardState.status == BottomCardStatus.close
+                          ? -_bottomCardHeight + _bottomCardTopPartHeight
+                          : 0,
+                      child: GestureDetector(
+                        onTap: () => _onBottomCardTap(bottomCardState),
+                        child: BottomCard(
+                          data: diaryData,
+                          width: _bottomCardWidth,
+                          height: _bottomCardHeight,
+                          topPartHeight: _bottomCardTopPartHeight,
+                        ),
                       ),
-                    ),
-                    const Expanded(
-                      flex: 3,
-                      child: AddButton(),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: SemiCircularProgressBar(
-                        size: 32,
-                        data: diaryData,
-                      ),
-                    ),
-                    SizedBox(
-                      height: _bottomCardTopPartHeight,
                     ),
                   ],
                 );
               },
-            ),
-            BlocBuilder<BottomCardCubit, BottomCardState>(
-              builder: (context, state) {
-                return AnimatedPositioned(
-                  curve: Curves.easeOut,
-                  duration: const Duration(milliseconds: 300),
-                  bottom: state.status == BottomCardStatus.close 
-                      ? -_bottomCardHeight + _bottomCardTopPartHeight
-                      : 0,
-                  child: GestureDetector(
-                    onTap: () => _onBottomCardTap(state),
-                    child: BottomCard(
-                      data: _currentData,
-                      width: _bottomCardWidth,
-                      height: _bottomCardHeight,
-                      topPartHeight: _bottomCardTopPartHeight,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

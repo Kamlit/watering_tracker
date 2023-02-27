@@ -9,7 +9,6 @@ class BottomCardCubit extends Cubit<BottomCardState> {
       : super(
           const BottomCardState(
             status: BottomCardStatus.close,
-            page: BottomCardPage.details,
           ),
         );
 
@@ -22,12 +21,6 @@ class BottomCardCubit extends Cubit<BottomCardState> {
   void closeBottomCard() {
     emit(
       state.copyWith(status: BottomCardStatus.close),
-    );
-  }
-
-  void changePage(BottomCardPage newPage) {
-    emit(
-      state.copyWith(page: newPage),
     );
   }
 }

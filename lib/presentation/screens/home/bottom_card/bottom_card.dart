@@ -1,12 +1,11 @@
 import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
-import 'package:drink_tracker/presentation/screens/home/bottom_card/details_page.dart';
-import 'package:drink_tracker/presentation/screens/home/bottom_card/history_page.dart';
+import 'package:drink_tracker/presentation/screens/home/bottom_card/entries_page.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BottomCard extends StatefulWidget {
+class BottomCard extends StatelessWidget {
   const BottomCard({
     required this.data,
     required this.width,
@@ -21,23 +20,10 @@ class BottomCard extends StatefulWidget {
   final double topPartHeight;
 
   @override
-  State<BottomCard> createState() => _BottomCardState();
-}
-
-class _BottomCardState extends State<BottomCard> {
-  final PageController _pageController = PageController(initialPage: 1000);
-
-  void _onPageChanged(int page) {
-    var newPage =
-        page.isEven ? BottomCardPage.details : BottomCardPage.history;
-    context.read<BottomCardCubit>().changePage(newPage);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: width,
+      height: height,
       decoration: const BoxDecoration(
         color: AppColors.dark,
         borderRadius: BorderRadius.vertical(
@@ -47,50 +33,30 @@ class _BottomCardState extends State<BottomCard> {
       child: Column(
         children: [
           SizedBox(
-            height: widget.topPartHeight,
+            height: topPartHeight,
             child: BlocBuilder<BottomCardCubit, BottomCardState>(
               builder: (context, state) {
                 if (state.status == BottomCardStatus.open) {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.arrow_left,
-                        color: AppColors.white,
-                      ),
-                      BlocBuilder<BottomCardCubit, BottomCardState>(
-                        builder: (context, state) {
-                          return Text(
-                            state.page == BottomCardPage.details
-                                ? 'Details'
-                                : 'History',
-                            style: AppTextStyle.h2,
-                          );
-                        },
-                      ),
-                      const Icon(
-                        Icons.arrow_right,
-                        color: AppColors.white,
+                    children: const [
+                      Text(
+                        'Entries',
+                        style: AppTextStyle.h2,
                       ),
                     ],
                   );
                 } else {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
+                    children: const [
+                      Icon(
                         Icons.arrow_drop_up,
                         color: AppColors.white,
                       ),
-                      BlocBuilder<BottomCardCubit, BottomCardState>(
-                        builder: (context, state) {
-                          return Text(
-                            state.page == BottomCardPage.details
-                                ? 'Details'
-                                : 'History',
-                            style: AppTextStyle.h2,
-                          );
-                        },
+                      Text(
+                        'Entries',
+                        style: AppTextStyle.h2,
                       ),
                     ],
                   );
@@ -99,16 +65,10 @@ class _BottomCardState extends State<BottomCard> {
             ),
           ),
           Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              onPageChanged: _onPageChanged,
-              itemBuilder: (context, index) => index.isEven
-                  ? DetailsPage(data: widget.data)
-                  : HistoryPage(data: widget.data),
-            ),
+            child: EntriesPage(data: data),
           ),
           SizedBox(
-            height: widget.topPartHeight,
+            height: topPartHeight,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [

@@ -31,6 +31,13 @@ class DiaryCubit extends HydratedCubit<DiaryState> {
     emit(state.copyWith(diary: diary));
   }
 
+  void deleteEntry(DateTime date, DiaryEntry entry ) {
+    final diary = Map.of(state.diary!);
+    diary[date]!.remove(entry);
+    
+    emit(state.copyWith(diary: diary));
+  }
+
   @override
   DiaryState? fromJson(Map<String, dynamic> json) {
     return DiaryState.fromJson(json);

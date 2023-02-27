@@ -8,22 +8,22 @@ enum BottomCardPage { details, history }
 class BottomCardState extends Equatable {
   const BottomCardState({
     required this.status,
-    required this.page,
+
   });
 
   final BottomCardStatus status;
-  final BottomCardPage page;
+
 
   BottomCardState copyWith({
     BottomCardStatus? status,
-    BottomCardPage? page,
+
   }) {
     return BottomCardState(
       status: status ?? this.status,
-      page: page ?? this.page,
+
     );
   }
 
   @override
-  List<Object?> get props => [status, page];
+  List<Object?> get props => [status];
 }
