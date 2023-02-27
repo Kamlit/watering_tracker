@@ -25,6 +25,7 @@ class _AddEntryModalBottomSheetState extends State<AddEntryModalBottomSheet> {
     BlocProvider.of<DiaryCubit>(context).addEntry(
       context.read<PageDateCubit>().state.pageDate,
       DiaryEntry(
+        date: DateTime.now(),
         drinkType: _drinkType,
         amount: _amount,
       ),

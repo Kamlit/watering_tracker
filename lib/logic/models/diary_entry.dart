@@ -8,6 +8,7 @@ class DiaryEntry {
   DiaryEntry({
     required this.drinkType,
     required this.amount,
+    required this.date,
   });
 
   factory DiaryEntry.fromJson(Map<String, dynamic> json) =>
@@ -15,11 +16,12 @@ class DiaryEntry {
 
   final DrinkType drinkType;
   final int amount;
+  final DateTime date;
 
   Map<String, dynamic> toJson() => _$DiaryEntryToJson(this);
 
   @override
   String toString() {
-    return 'DiaryEntry{${drinkType.name}, $amount}';
+    return 'DiaryEntry{${drinkType.name}, $amount, $date}';
   }
 }
