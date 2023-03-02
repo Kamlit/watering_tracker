@@ -1,4 +1,5 @@
 import 'package:drink_tracker/TEMP_drink_types.dart';
+import 'package:drink_tracker/logic/helpers/extensions.dart';
 import 'package:drink_tracker/logic/models/drink_type.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class SelectDrinkTypePage extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(10),
+        const SizedBox(
+          height: 70,
           child: Center(
             child: Text(
               'Drink type',
@@ -28,14 +29,41 @@ class SelectDrinkTypePage extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: () => onSelected(drinkTypes[index]),
-                title: Text(
-                  drinkTypes[index].name,
-                  style: AppTextStyle.h3,
+                title: Center(
+                  child: Text(
+                    drinkTypes[index].name,
+                    style: AppTextStyle.h3,
+                  ),
+                ),
+                subtitle: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Icon(
+                    Icons.circle,
+                    size: 9,
+                    color: drinkTypes[index].color.toColor(),
+                  ),
                 ),
               );
             },
           ),
-        )
+        ),
+      
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.add,
+                  color: AppColors.greyLight,
+                  size: 25,
+                ),
+              ),
+              Text('Add drink type', style: TextStyle(color: AppColors.greyLight),),
+            ],
+          ),
+        ),
       ],
     );
   }
