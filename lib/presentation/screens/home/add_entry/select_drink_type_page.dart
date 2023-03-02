@@ -47,20 +47,22 @@ class SelectDrinkTypePage extends StatelessWidget {
             },
           ),
         ),
-      
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   color: AppColors.greyLight,
                   size: 25,
                 ),
               ),
-              Text('Add drink type', style: TextStyle(color: AppColors.greyLight),),
+              const Text(
+                'Add drink type',
+                style: TextStyle(color: AppColors.greyLight),
+              ),
             ],
           ),
         ),

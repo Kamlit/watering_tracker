@@ -1,3 +1,4 @@
+import 'package:drink_tracker/TEMP_amounts.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 
@@ -15,28 +16,74 @@ class SelectAmountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.all(10),
+        SizedBox(
+          height: 70,
           child: Center(
-            child: Text(
-              'Amount',
-              style: AppTextStyle.h2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        color: AppColors.white,
+                        onPressed: onBack,
+                      ),
+                    ],
+                  ),
+                ),
+                const Text(
+                  'Amount',
+                  style: AppTextStyle.h2,
+                ),
+                const Spacer(),
+              ],
             ),
           ),
         ),
         Expanded(
-          child: TextField(
-            style: const TextStyle(
-              color: AppColors.greyLight,
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
             ),
-            onSubmitted: (value) {
-              onSelected(int.parse(value));
+            itemCount: amounts.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () => onSelected(amounts[index]),
+                child: GridTile(
+                  child: Center(
+                    child: Text(
+                      '${amounts[index]} ml',
+                      style: AppTextStyle.h3,
+                    ),
+                  ),
+                ),
+              );
             },
           ),
         ),
-        TextButton(
-          onPressed: onBack,
-          child: const Text('Back'),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.add,
+                  color: AppColors.greyLight,
+                  size: 25,
+                ),
+              ),
+              const Text(
+                'Add amount',
+                style: TextStyle(color: AppColors.greyLight),
+              ),
+            ],
+          ),
         ),
       ],
     );
