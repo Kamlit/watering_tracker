@@ -17,8 +17,8 @@ class DayTitle extends StatelessWidget {
           builder: (context, state) {
             return Text(
               DateFormat.yMMMd().format(state.pageDate),
-              style: AppTextStyle.h2,
               overflow: TextOverflow.clip,
+              style: AppTextStyle.h2,
             );
           },
         ),

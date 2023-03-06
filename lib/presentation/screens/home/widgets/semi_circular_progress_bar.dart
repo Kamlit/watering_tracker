@@ -20,10 +20,7 @@ class SemiCircularProgressBar extends StatelessWidget {
       onTap: () => showDialog<void>(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            backgroundColor: AppColors.backgroundColor,
-            content: DetailsWindow(data: data),
-          );
+          return DetailsWindow(data: data);
         },
       ),
       child: Stack(

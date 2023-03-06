@@ -26,9 +26,7 @@ class BottomCard extends StatelessWidget {
       height: height,
       decoration: const BoxDecoration(
         color: AppColors.dark,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25),
-        ),
+        borderRadius: AppBorderRadius.onlyTop,
       ),
       child: Column(
         children: [

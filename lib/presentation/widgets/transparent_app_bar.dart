@@ -1,5 +1,7 @@
+import 'package:drink_tracker/presentation/style.dart';
 import 'package:drink_tracker/presentation/widgets/day_title.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransparentAppBar extends StatefulWidget implements PreferredSizeWidget {
   const TransparentAppBar({super.key, required this.height});
@@ -18,9 +20,9 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: widget.height,
-      titleTextStyle: const TextStyle(),
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
+      centerTitle: true,
       elevation: 0,
       title: const DayTitle(),
       leading: IconButton(

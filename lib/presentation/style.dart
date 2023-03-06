@@ -37,3 +37,12 @@ class AppTextStyle {
     fontSize: AppFontSize.h3,
   );
 }
+
+class AppBorderRadius {
+  static const BorderRadiusGeometry all = BorderRadius.all(
+    Radius.circular(25),
+  );
+  static const BorderRadiusGeometry onlyTop = BorderRadius.vertical(
+    top: Radius.circular(25),
+  );
+}

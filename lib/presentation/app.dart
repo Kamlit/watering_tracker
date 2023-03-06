@@ -22,6 +22,9 @@ class App extends StatelessWidget {
             AppStarted(),
           ),
         child: MaterialApp(
+          theme: ThemeData(
+            fontFamily: 'Nunito',
+          ),
           title: 'Drinking Tracker',
           home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
             builder: (context, state) {

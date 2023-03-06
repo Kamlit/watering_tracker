@@ -47,8 +47,8 @@ class SelectDrinkTypePage extends StatelessWidget {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8),
+        SizedBox(
+          height: 70,
           child: Column(
             children: [
               IconButton(
