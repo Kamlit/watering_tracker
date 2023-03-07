@@ -22,7 +22,11 @@ class _SelectAmountPageState extends State<SelectAmountPage> {
     showDialog<void>(
       context: context,
       builder: (context) {
-        return const CustomAmountWindow();
+        return CustomAmountWindow(
+          onSelected: (amount) {
+            widget.onSelected(amount);
+          },
+        );
       },
     );
   }

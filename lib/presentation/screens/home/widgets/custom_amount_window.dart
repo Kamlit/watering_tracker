@@ -2,7 +2,12 @@ import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 
 class CustomAmountWindow extends StatefulWidget {
-  const CustomAmountWindow({super.key});
+  const CustomAmountWindow({
+    super.key,
+    required this.onSelected,
+  });
+
+  final void Function(int amount) onSelected;
 
   @override
   State<CustomAmountWindow> createState() => _CustomAmountWindowState();
@@ -10,6 +15,11 @@ class CustomAmountWindow extends StatefulWidget {
 
 class _CustomAmountWindowState extends State<CustomAmountWindow> {
   int _amount = 250;
+
+  void _onAddPressed() {
+    Navigator.of(context).pop();
+    widget.onSelected(_amount);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +49,10 @@ class _CustomAmountWindowState extends State<CustomAmountWindow> {
         ),
       ),
       actionsPadding: const EdgeInsets.all(15),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
+      actionsAlignment: MainAxisAlignment.center,
       actions: [
         TextButton(
-          onPressed: () {},
-          child: const Text('Cancel', style: AppTextStyle.h3),
-        ),
-        TextButton(
-          onPressed: () {},
+          onPressed: _onAddPressed,
           child: const Text('Add', style: AppTextStyle.h3),
         ),
       ],
