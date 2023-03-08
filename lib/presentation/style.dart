@@ -21,20 +21,29 @@ class AppTextStyle {
     color: AppColors.white,
     fontSize: AppFontSize.h1,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Nunito',
   );
   static const TextStyle h1Grey = TextStyle(
     color: AppColors.greyLight,
     fontSize: AppFontSize.h1,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Nunito',
   );
   static const TextStyle h2 = TextStyle(
     color: AppColors.white,
     fontSize: AppFontSize.h2,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Nunito',
   );
   static const TextStyle h3 = TextStyle(
     color: AppColors.greyLight,
     fontSize: AppFontSize.h3,
+    fontFamily: 'Nunito',
+  );
+  static const TextStyle h3dark = TextStyle(
+    color: AppColors.greyDark,
+    fontSize: AppFontSize.h3,
+    fontFamily: 'Nunito',
   );
 }
 

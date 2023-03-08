@@ -50,7 +50,7 @@ class EntriesPage extends StatelessWidget {
                     children: [
                       Text(
                         entry.drinkType.name,
-                        style: AppTextStyle.h3,
+                        style: AppTextStyle.h2,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10),
@@ -63,7 +63,7 @@ class EntriesPage extends StatelessWidget {
                       const Spacer(),
                       Text(
                         '${entry.amount.toString()} ml',
-                        style: AppTextStyle.h3,
+                        style: AppTextStyle.h2,
                       ),
                     ],
                   ),

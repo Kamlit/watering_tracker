@@ -1,7 +1,11 @@
+import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/presentation/style.dart';
+import 'package:drink_tracker/presentation/widgets/calendar.dart';
 import 'package:drink_tracker/presentation/widgets/day_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class TransparentAppBar extends StatefulWidget implements PreferredSizeWidget {
   const TransparentAppBar({super.key, required this.height});
@@ -32,7 +36,17 @@ class _TransparentAppBarState extends State<TransparentAppBar> {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () async {
+            await showDialog<void>(
+              context: context,
+              builder: (_) {
+                return BlocProvider.value(
+                  value: BlocProvider.of<PageDateCubit>(context),
+                  child: const Calendar(),
+                );
+              },
+            );
+          },
           icon: const Icon(Icons.calendar_month),
           padding: const EdgeInsets.all(15),
         ),
