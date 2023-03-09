@@ -46,6 +46,12 @@ class _HomeViewState extends State<HomeView> {
   final double _appBarHeight = 70;
   final double _bottomCardTopPartHeight = 70;
 
+  void _jumpToPage(DateTime date) {
+    _pageController.jumpToPage(
+      DateTime.now().difference(date).inDays,
+    );
+  }
+
   void _onPageChanged(int page) {
     var newPageDate = DateHelper.getDateFromPage(page);
     context.read<PageDateCubit>().pageChanged(
@@ -123,9 +129,7 @@ class _HomeViewState extends State<HomeView> {
                 return BlocListener<PageDateCubit, PageDateState>(
                   listener: (context, state) {
                     if (state.status == PageDateStatus.jumped) {
-                      _pageController.jumpToPage(
-                        DateTime.now().difference(state.pageDate).inDays,
-                      );
+                      _jumpToPage(state.pageDate);
                     }
                   },
                   child: Stack(
