@@ -2,7 +2,6 @@ import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
 import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/helpers/date_helper.dart';
-import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/presentation/drawer/app_drawer.dart';
 import 'package:drink_tracker/presentation/screens/home/bottom_card/bottom_card.dart';
 import 'package:drink_tracker/presentation/screens/home/widgets/add_button.dart';
@@ -43,12 +42,13 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final PageController _pageController = PageController();
   final double _appBarHeight = 70;
   final double _bottomCardTopPartHeight = 70;
 
   void _onPageChanged(int page) {
     var newPageDate = DateHelper.getDateFromPage(page);
-    context.read<PageDateCubit>().pageChanging(
+    context.read<PageDateCubit>().pageChanged(
           newPageDate: newPageDate,
         );
   }
@@ -78,6 +78,12 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   double get _topViewPadding {
     return MediaQuery.of(context).viewPadding.top;
   }
@@ -105,6 +111,7 @@ class _HomeViewState extends State<HomeView> {
             final diaryState = context.watch<DiaryCubit>().state;
             final bottomCardState = context.watch<BottomCardCubit>().state;
             return PageView.builder(
+              controller: _pageController,
               physics: bottomCardState.status == BottomCardStatus.open
                   ? const NeverScrollableScrollPhysics()
                   : const AlwaysScrollableScrollPhysics(),
@@ -113,49 +120,58 @@ class _HomeViewState extends State<HomeView> {
               itemBuilder: (context, page) {
                 final pageDate = DateHelper.getDateFromPage(page);
                 final diaryData = diaryState.getDiaryData(pageDate);
-                return Stack(
-                  children: [
-                    Column(
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: MililitresProgress(
-                            data: diaryData,
+                return BlocListener<PageDateCubit, PageDateState>(
+                  listener: (context, state) {
+                    if (state.status == PageDateStatus.jumped) {
+                      _pageController.jumpToPage(
+                        DateTime.now().difference(state.pageDate).inDays,
+                      );
+                    }
+                  },
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Expanded(
+                            flex: 6,
+                            child: MililitresProgress(
+                              data: diaryData,
+                            ),
                           ),
-                        ),
-                        const Expanded(
-                          flex: 3,
-                          child: AddButton(),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: SemiCircularProgressBar(
-                            size: 32,
-                            data: diaryData,
+                          const Expanded(
+                            flex: 3,
+                            child: AddButton(),
                           ),
-                        ),
-                        SizedBox(
-                          height: _bottomCardTopPartHeight,
-                        ),
-                      ],
-                    ),
-                    AnimatedPositioned(
-                      curve: Curves.easeOut,
-                      duration: const Duration(milliseconds: 300),
-                      bottom: bottomCardState.status == BottomCardStatus.close
-                          ? -_bottomCardHeight + _bottomCardTopPartHeight
-                          : 0,
-                      child: GestureDetector(
-                        onTap: () => _onBottomCardTap(bottomCardState),
-                        child: BottomCard(
-                          data: diaryData,
-                          width: _bottomCardWidth,
-                          height: _bottomCardHeight,
-                          topPartHeight: _bottomCardTopPartHeight,
+                          Expanded(
+                            flex: 3,
+                            child: SemiCircularProgressBar(
+                              size: 32,
+                              data: diaryData,
+                            ),
+                          ),
+                          SizedBox(
+                            height: _bottomCardTopPartHeight,
+                          ),
+                        ],
+                      ),
+                      AnimatedPositioned(
+                        curve: Curves.easeOut,
+                        duration: const Duration(milliseconds: 300),
+                        bottom: bottomCardState.status == BottomCardStatus.close
+                            ? -_bottomCardHeight + _bottomCardTopPartHeight
+                            : 0,
+                        child: GestureDetector(
+                          onTap: () => _onBottomCardTap(bottomCardState),
+                          child: BottomCard(
+                            data: diaryData,
+                            width: _bottomCardWidth,
+                            height: _bottomCardHeight,
+                            topPartHeight: _bottomCardTopPartHeight,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             );

@@ -69,7 +69,7 @@ class Calendar extends StatelessWidget {
           ),
           child: TextButton(
             onPressed: () {
-              context.read<PageDateCubit>().pageChanging(
+              context.read<PageDateCubit>().pageJumped(
                     newPageDate: selectedDate,
                   );
               Navigator.of(context).pop();

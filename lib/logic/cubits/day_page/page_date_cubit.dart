@@ -1,3 +1,4 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,21 +17,24 @@ class PageDateCubit extends Cubit<PageDateState> {
           ),
         );
 
-  void pageChanging({
+  void pageChanged({
     required DateTime newPageDate,
   }) {
     emit(
       state.copyWith(
-        status: PageDateStatus.changing,
+        status: PageDateStatus.changed,
         pageDate: newPageDate,
       ),
     );
   }
 
-  void pageChanged() {
+  void pageJumped({
+    required DateTime newPageDate,
+  }) {
     emit(
       state.copyWith(
-        status: PageDateStatus.changed,
+        status: PageDateStatus.jumped,
+        pageDate: newPageDate,
       ),
     );
   }
