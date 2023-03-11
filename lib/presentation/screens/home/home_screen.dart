@@ -1,4 +1,3 @@
-import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/cubits/page/page_cubit.dart';
 import 'package:drink_tracker/logic/helpers/date_helper.dart';
@@ -23,9 +22,6 @@ class HomeScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => PageCubit(),
-        ),
-        BlocProvider(
-          create: (_) => BottomCardCubit(),
         ),
       ],
       child: const HomeView(),
@@ -99,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
     var swipingSensitivity = 500;
     if (isSwipingHorizontal) {
       var isPageChanging =
-          _pageController.page!.roundToDouble() == _pageController.page;
+          _pageController.page!.roundToDouble() != _pageController.page;
       if (!isPageChanging) {
         var velocity = details.velocity.pixelsPerSecond.dx;
         if (velocity > swipingSensitivity) {

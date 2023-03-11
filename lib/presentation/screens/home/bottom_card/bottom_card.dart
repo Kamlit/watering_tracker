@@ -1,9 +1,7 @@
-import 'package:drink_tracker/logic/cubits/bottom_card/bottom_card_cubit.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/presentation/screens/home/bottom_card/entries_page.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BottomCard extends StatelessWidget {
   const BottomCard({
@@ -36,34 +34,18 @@ class BottomCard extends StatelessWidget {
           children: [
             SizedBox(
               height: topPartHeight,
-              child: BlocBuilder<BottomCardCubit, BottomCardState>(
-                builder: (context, state) {
-                  if (state.status == BottomCardStatus.open) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Entries',
-                          style: AppTextStyle.h2,
-                        ),
-                      ],
-                    );
-                  } else {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.arrow_drop_up,
-                          color: AppColors.white,
-                        ),
-                        Text(
-                          'Entries',
-                          style: AppTextStyle.h2,
-                        ),
-                      ],
-                    );
-                  }
-                },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.arrow_drop_up,
+                    color: AppColors.white,
+                  ),
+                  Text(
+                    'Entries',
+                    style: AppTextStyle.h2,
+                  ),
+                ],
               ),
             ),
             Expanded(
