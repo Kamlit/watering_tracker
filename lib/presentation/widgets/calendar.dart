@@ -10,7 +10,7 @@ class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pageDate = context.read<PageDateCubit>().state.pageDate;
-    DateTime selectedDate = pageDate;
+    var selectedDate = pageDate;
     return AlertDialog(
       shape: const RoundedRectangleBorder(
         borderRadius: AppBorderRadius.all,
@@ -69,7 +69,7 @@ class Calendar extends StatelessWidget {
           ),
           child: TextButton(
             onPressed: () {
-              context.read<PageDateCubit>().pageJumped(
+              context.read<PageDateCubit>().requestPageJump(
                     newPageDate: selectedDate,
                   );
               Navigator.of(context).pop();

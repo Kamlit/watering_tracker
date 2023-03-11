@@ -1,6 +1,6 @@
 part of 'page_date_cubit.dart';
 
-enum PageDateStatus { changed, jumped }
+enum PageDateStatus { changed, jumpRequested }
 
 class PageDateState extends Equatable {
   const PageDateState({

@@ -28,12 +28,12 @@ class PageDateCubit extends Cubit<PageDateState> {
     );
   }
 
-  void pageJumped({
+  void requestPageJump({
     required DateTime newPageDate,
   }) {
     emit(
       state.copyWith(
-        status: PageDateStatus.jumped,
+        status: PageDateStatus.jumpRequested,
         pageDate: newPageDate,
       ),
     );

@@ -11,9 +11,11 @@ class DayTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children:  [
+      children: [
         const Icon(Icons.arrow_left),
         BlocBuilder<PageDateCubit, PageDateState>(
+          buildWhen: (previous, current) =>
+              current.status == PageDateStatus.changed,
           builder: (context, state) {
             return Text(
               DateFormat.yMMMd().format(state.pageDate),

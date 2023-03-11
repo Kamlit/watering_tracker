@@ -41,6 +41,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.8.0
   path_provider: ^2.0.12
+  sliding_up_panel: ^2.0.0+1
   syncfusion_flutter_datepicker: ^20.3.61
 
 dev_dependencies:
