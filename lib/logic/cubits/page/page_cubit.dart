@@ -1,14 +1,13 @@
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'page_date_state.dart';
+part 'page_state.dart';
 
-class PageDateCubit extends Cubit<PageDateState> {
-  PageDateCubit()
+class PageCubit extends Cubit<PageState> {
+  PageCubit()
       : super(
-          PageDateState(
-            status: PageDateStatus.changed,
+          PageState(
+            status: PageStatus.changed,
             pageDate: DateTime(
               DateTime.now().year,
               DateTime.now().month,
@@ -22,7 +21,7 @@ class PageDateCubit extends Cubit<PageDateState> {
   }) {
     emit(
       state.copyWith(
-        status: PageDateStatus.changed,
+        status: PageStatus.changed,
         pageDate: newPageDate,
       ),
     );
@@ -33,7 +32,7 @@ class PageDateCubit extends Cubit<PageDateState> {
   }) {
     emit(
       state.copyWith(
-        status: PageDateStatus.jumpRequested,
+        status: PageStatus.jumpRequested,
         pageDate: newPageDate,
       ),
     );

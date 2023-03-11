@@ -1,4 +1,4 @@
-import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
+import 'package:drink_tracker/logic/cubits/page/page_cubit.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,7 @@ class Calendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pageDate = context.read<PageDateCubit>().state.pageDate;
+    final pageDate = context.read<PageCubit>().state.pageDate;
     var selectedDate = pageDate;
     return AlertDialog(
       shape: const RoundedRectangleBorder(
@@ -69,7 +69,7 @@ class Calendar extends StatelessWidget {
           ),
           child: TextButton(
             onPressed: () {
-              context.read<PageDateCubit>().requestPageJump(
+              context.read<PageCubit>().requestPageJump(
                     newPageDate: selectedDate,
                   );
               Navigator.of(context).pop();

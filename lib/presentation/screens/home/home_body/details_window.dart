@@ -1,5 +1,5 @@
 import 'package:drink_tracker/logic/models/diary_data.dart';
-import 'package:drink_tracker/presentation/screens/home/widgets/percentage_bar_tile.dart';
+import 'package:drink_tracker/presentation/screens/home/home_body/percentage_bar_tile.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 

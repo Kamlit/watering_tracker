@@ -1,21 +1,21 @@
-part of 'page_date_cubit.dart';
+part of 'page_cubit.dart';
 
-enum PageDateStatus { changed, jumpRequested }
+enum PageStatus { changed, jumpRequested }
 
-class PageDateState extends Equatable {
-  const PageDateState({
+class PageState extends Equatable {
+  const PageState({
     required this.status,
     required this.pageDate,
   });
 
-  final PageDateStatus status;
+  final PageStatus status;
   final DateTime pageDate;
 
-  PageDateState copyWith({
-    PageDateStatus? status,
+  PageState copyWith({
+    PageStatus? status,
     DateTime? pageDate,
   }) {
-    return PageDateState(
+    return PageState(
       status: status ?? this.status,
       pageDate: pageDate ?? this.pageDate,
     );

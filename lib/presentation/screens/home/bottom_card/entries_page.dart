@@ -1,9 +1,8 @@
-import 'package:drink_tracker/logic/cubits/day_page/page_date_cubit.dart';
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
+import 'package:drink_tracker/logic/cubits/page/page_cubit.dart';
 import 'package:drink_tracker/logic/helpers/extensions.dart';
 import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/presentation/style.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -31,7 +30,7 @@ class EntriesPage extends StatelessWidget {
               (entry) => Dismissible(
                 direction: DismissDirection.endToStart,
                 onDismissed: (direction) {
-                  final date = context.read<PageDateCubit>().state.pageDate;
+                  final date = context.read<PageCubit>().state.pageDate;
                   context.read<DiaryCubit>().deleteEntry(date, entry);
                 },
                 onUpdate: (details) {

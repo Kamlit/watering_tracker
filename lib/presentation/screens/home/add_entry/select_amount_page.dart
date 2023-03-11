@@ -1,5 +1,5 @@
 import 'package:drink_tracker/TEMP_amounts.dart';
-import 'package:drink_tracker/presentation/screens/home/widgets/custom_amount_window.dart';
+import 'package:drink_tracker/presentation/screens/home/home_body/custom_amount_window.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 
