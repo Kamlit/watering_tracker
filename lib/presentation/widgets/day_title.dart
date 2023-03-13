@@ -1,4 +1,5 @@
 import 'package:drink_tracker/logic/cubits/page/page_cubit.dart';
+import 'package:drink_tracker/logic/helpers/date_helper.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class DayTitle extends StatelessWidget {
               current.status == PageStatus.changed,
           builder: (context, state) {
             return Text(
-              DateFormat.yMMMd().format(state.pageDate),
+              DateHelper.formatDate(state.pageDate),
               overflow: TextOverflow.clip,
               style: AppTextStyle.h2,
             );
