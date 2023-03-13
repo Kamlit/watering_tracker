@@ -7,15 +7,16 @@ import 'package:flutter/material.dart';
 class SemiCircularProgressBar extends StatelessWidget {
   const SemiCircularProgressBar({
     super.key,
-    required this.size,
+    required this.padding,
     required this.data,
   });
 
-  final double size;
+  final double padding;
   final DiaryData data;
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () => showDialog<void>(
         context: context,
@@ -24,26 +25,25 @@ class SemiCircularProgressBar extends StatelessWidget {
         },
       ),
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.bottomCenter,
         children: [
-          Positioned(
-            child: CustomPaint(
-              size: Size(size * 10, size / 2 * 10),
-              painter: SemiCirclePainter(
-                backgroundColor: AppColors.greyDark,
-                progressBarColors: data.drinkTypesColors,
-                progressBarFractions: data.drinkTypesFractions,
-                barWidth: 20,
-              ),
+          CustomPaint(
+            size: Size(
+              width - padding * 2,
+              width / 2 - padding,
+            ),
+            painter: SemiCirclePainter(
+              backgroundColor: AppColors.greyDark,
+              progressBarColors: data.drinkTypesColors,
+              progressBarFractions: data.drinkTypesFractions,
+              barWidth: 20,
             ),
           ),
-          Positioned.fill(
-            top: 50,
-            child: Center(
-              child: Text(
-                '${data.goalPercentage}%',
-                style: AppTextStyle.h1Grey,
-              ),
+          Positioned(
+            bottom: 20,
+            child: Text(
+              '${data.goalPercentage}%',
+              style: AppTextStyle.h1Grey,
             ),
           )
         ],

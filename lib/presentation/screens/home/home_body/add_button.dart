@@ -35,23 +35,20 @@ class AddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ElevatedButton(
-          onPressed: () => _showModalBottomSheet(context),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.greyDark,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(90),
-            ),
-            minimumSize: const Size(60, 60),
+    return Center(
+      child: ElevatedButton(
+        onPressed: () => _showModalBottomSheet(context),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.greyDark,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(90),
           ),
-          child: const Icon(
-            Icons.add,
-          ),
+          minimumSize: const Size(60, 60),
         ),
-      ],
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
     );
   }
 }
