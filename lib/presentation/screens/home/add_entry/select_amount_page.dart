@@ -1,4 +1,5 @@
 import 'package:drink_tracker/TEMP_amounts.dart';
+import 'package:drink_tracker/presentation/screens/home/add_entry/amounts_grid_view.dart';
 import 'package:drink_tracker/presentation/screens/home/home_body/custom_amount_window.dart';
 import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +31,6 @@ class _SelectAmountPageState extends State<SelectAmountPage> {
       },
     );
   }
-
-  void _showAddAmountWindow() {}
 
   @override
   Widget build(BuildContext context) {
@@ -67,64 +66,42 @@ class _SelectAmountPageState extends State<SelectAmountPage> {
           ),
         ),
         Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              childAspectRatio: 1.5,
-            ),
-            itemCount: amounts.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () => widget.onSelected(amounts[index]),
-                child: GridTile(
-                  child: Center(
-                    child: Text(
-                      '${amounts[index]} ml',
-                      style: AppTextStyle.h3,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: AmountsGridView(
+                  onSelected: widget.onSelected,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  width: 250,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.greyDark,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: AppBorderRadius.all,
+                      ),
+                    ),
+                    onPressed: _showCustomAmountWindow,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        Icon(
+                          Icons.tune,
+                          color: AppColors.greyLight,
+                        ),
+                        Text(
+                          'Add custom amount',
+                          style: AppTextStyle.h3,
+                        )
+                      ],
                     ),
                   ),
                 ),
-              );
-            },
-          ),
-        ),
-        SizedBox(
-          height: 70,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: _showAddAmountWindow,
-                    icon: const Icon(
-                      Icons.add,
-                      color: AppColors.greyLight,
-                      size: 25,
-                    ),
-                  ),
-                  const Text(
-                    'Add amount',
-                    style: TextStyle(color: AppColors.greyLight),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: _showCustomAmountWindow,
-                    icon: const Icon(
-                      Icons.tune,
-                      color: AppColors.greyLight,
-                      size: 25,
-                    ),
-                  ),
-                  const Text(
-                    'Custom amount',
-                    style: TextStyle(color: AppColors.greyLight),
-                  ),
-                ],
-              ),
+              )
             ],
           ),
         ),
