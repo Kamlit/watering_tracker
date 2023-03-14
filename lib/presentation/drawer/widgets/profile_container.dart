@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileContainer extends StatelessWidget {
   const ProfileContainer({required this.user, super.key});
- 
+
   final User? user;
 
   void _signOut(BuildContext context) {
@@ -14,12 +14,15 @@ class ProfileContainer extends StatelessWidget {
       SignOutRequested(),
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
-      color: AppColors.dark,
+      decoration: const BoxDecoration(
+        color: AppColors.dark,
+        borderRadius: AppBorderRadius.all,
+      ),
       height: 150,
       child: Row(
         children: [
