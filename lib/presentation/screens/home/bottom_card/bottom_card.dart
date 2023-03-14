@@ -54,22 +54,6 @@ class BottomCard extends StatelessWidget {
                 scrollController: scrollController,
               ),
             ),
-            // SizedBox(
-            //   height: topPartHeight,
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: const [
-            //       Text(
-            //         'Hide',
-            //         style: AppTextStyle.h3,
-            //       ),
-            //       Icon(
-            //         Icons.arrow_drop_down,
-            //         color: AppColors.greyLight,
-            //       )
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),
