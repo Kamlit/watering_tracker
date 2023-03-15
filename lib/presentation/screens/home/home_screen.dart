@@ -4,8 +4,8 @@ import 'package:drink_tracker/logic/helpers/date_helper.dart';
 import 'package:drink_tracker/presentation/drawer/app_drawer.dart';
 import 'package:drink_tracker/presentation/screens/home/bottom_card/bottom_card.dart';
 import 'package:drink_tracker/presentation/screens/home/home_body/home_body.dart';
+import 'package:drink_tracker/presentation/screens/home/widgets/home_app_bar.dart';
 import 'package:drink_tracker/presentation/style.dart';
-import 'package:drink_tracker/presentation/widgets/transparent_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -139,7 +139,7 @@ class _HomeViewState extends State<HomeView> {
       drawerEnableOpenDragGesture: false,
       backgroundColor: AppColors.backgroundColor,
       drawer: const AppDrawer(),
-      appBar: TransparentAppBar(height: _appBarHeight),
+      appBar: HomeAppBar(height: _appBarHeight),
       body: GestureDetector(
         onPanEnd: _onPanEnd,
         child: BlocBuilder<DiaryCubit, DiaryState>(

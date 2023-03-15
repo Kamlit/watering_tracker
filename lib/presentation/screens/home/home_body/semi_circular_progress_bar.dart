@@ -1,7 +1,7 @@
 import 'package:drink_tracker/logic/models/diary_data.dart';
 import 'package:drink_tracker/presentation/screens/home/home_body/details_window.dart';
 import 'package:drink_tracker/presentation/style.dart';
-import 'package:drink_tracker/presentation/widgets/semi_circle_painter.dart';
+import 'package:drink_tracker/presentation/screens/home/widgets/semi_circle_painter.dart';
 import 'package:flutter/material.dart';
 
 class SemiCircularProgressBar extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:drink_tracker/presentation/style.dart';
-import 'package:drink_tracker/presentation/widgets/percentage_bar.dart';
+import 'package:drink_tracker/presentation/screens/home/widgets/percentage_bar.dart';
 import 'package:flutter/material.dart';
 
 class PercentageBarTile extends StatelessWidget {

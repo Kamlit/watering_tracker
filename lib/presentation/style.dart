@@ -48,10 +48,13 @@ class AppTextStyle {
 }
 
 class AppBorderRadius {
+  static const double value = 25;
+
   static const BorderRadiusGeometry all = BorderRadius.all(
-    Radius.circular(25),
+    Radius.circular(value),
   );
+
   static const BorderRadiusGeometry onlyTop = BorderRadius.vertical(
-    top: Radius.circular(25),
+    top: Radius.circular(value),
   );
 }

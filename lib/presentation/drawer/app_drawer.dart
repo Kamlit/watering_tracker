@@ -1,3 +1,4 @@
+import 'package:drink_tracker/logic/routes.dart';
 import 'package:drink_tracker/presentation/drawer/widgets/drawer_tile.dart';
 import 'package:drink_tracker/presentation/drawer/widgets/profile_container.dart';
 import 'package:drink_tracker/presentation/style.dart';
@@ -26,7 +27,7 @@ class AppDrawer extends StatelessWidget {
                 children: [
                   DrawerTile(
                     icon: Icons.home,
-                    title: 'Home',
+                    title: 'Diary',
                     onTap: () {},
                   ),
                   DrawerTile(
@@ -42,7 +43,9 @@ class AppDrawer extends StatelessWidget {
                   DrawerTile(
                     icon: Icons.bookmark,
                     title: 'Saved values',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed(Routes.savedValuesScreen);
+                    },
                   ),
                   DrawerTile(
                     icon: Icons.settings,
