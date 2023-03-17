@@ -15,17 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => DiaryCubit(),
-        ),
-        BlocProvider(
-          create: (_) => PageCubit(),
-        ),
-      ],
-      child: const HomeView(),
-    );
+    return const HomeView();
   }
 }
 
