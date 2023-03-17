@@ -1,8 +1,9 @@
 import 'package:drink_tracker/presentation/drawer/app_drawer.dart';
+import 'package:drink_tracker/presentation/routing/router.dart';
+import 'package:drink_tracker/presentation/screens/home/add_entry/drink_types_grid_view.dart';
 import 'package:drink_tracker/presentation/screens/saved_values/widgets/saved_values_app_bar.dart';
 import 'package:drink_tracker/presentation/screens/saved_values/widgets/switch_button_tab.dart';
 import 'package:drink_tracker/presentation/style.dart';
-import 'package:drink_tracker/presentation/widgets/transparent_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class SavedValuesScreen extends StatefulWidget {
@@ -26,6 +27,14 @@ class _SavedValuesScreenState extends State<SavedValuesScreen> {
       body: Column(
         children: [
           const SwitchButtonTab(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: DrinkTypesGridView(
+                onSelected: (value) {},
+              ),
+            ),
+          ),
         ],
       ),
     );

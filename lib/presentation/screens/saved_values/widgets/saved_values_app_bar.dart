@@ -1,5 +1,6 @@
 import 'package:drink_tracker/logic/cubits/page/page_cubit.dart';
-import 'package:drink_tracker/logic/routes.dart';
+import 'package:drink_tracker/presentation/routing/router.dart';
+import 'package:drink_tracker/presentation/routing/routes.dart';
 import 'package:drink_tracker/presentation/screens/home/widgets/calendar.dart';
 import 'package:drink_tracker/presentation/screens/home/widgets/day_title.dart';
 import 'package:drink_tracker/presentation/style.dart';
@@ -23,18 +24,18 @@ class SavedValuesAppBar extends StatelessWidget implements PreferredSizeWidget {
     return TransparentAppBar(
       height: 80,
       leading: IconButton(
-        onPressed: () => Scaffold.of(context).openDrawer(),
-        icon: const Icon(Icons.menu),
+        onPressed: () => Navigator.of(context).pop(),
+        icon: const Icon(Icons.arrow_back),
         padding: const EdgeInsets.all(15),
       ),
       actions: [
-        IconButton(
-          onPressed: () => Navigator.of(context).popAndPushNamed(
-            Routes.homeScreen,
-          ),
-          icon: const Icon(Icons.home),
-          padding: const EdgeInsets.all(15),
-        ),
+        // IconButton(
+        //   onPressed: () => Navigator.of(context).popAndPushNamed(
+        //     Routes.homeScreen,
+        //   ),
+        //   icon: const Icon(Icons.home),
+        //   padding: const EdgeInsets.all(15),
+        // ),
       ],
       title: const Text(
         'Saved values',

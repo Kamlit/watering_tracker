@@ -1,4 +1,5 @@
-import 'package:drink_tracker/logic/routes.dart';
+import 'package:drink_tracker/presentation/routing/router.dart';
+import 'package:drink_tracker/presentation/routing/routes.dart';
 import 'package:drink_tracker/presentation/drawer/widgets/drawer_tile.dart';
 import 'package:drink_tracker/presentation/drawer/widgets/profile_container.dart';
 import 'package:drink_tracker/presentation/style.dart';
@@ -25,11 +26,11 @@ class AppDrawer extends StatelessWidget {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  DrawerTile(
-                    icon: Icons.home,
-                    title: 'Diary',
-                    onTap: () {},
-                  ),
+                  // DrawerTile(
+                  //   icon: Icons.home,
+                  //   title: 'Diary',
+                  //   onTap: () {},
+                  // ),
                   DrawerTile(
                     icon: Icons.bar_chart,
                     title: 'Statistics',
@@ -44,12 +45,18 @@ class AppDrawer extends StatelessWidget {
                     icon: Icons.bookmark,
                     title: 'Saved values',
                     onTap: () {
+                      Scaffold.of(context).closeDrawer();
                       Navigator.of(context).pushNamed(Routes.savedValuesScreen);
                     },
                   ),
                   DrawerTile(
                     icon: Icons.settings,
                     title: 'Settings',
+                    onTap: () {},
+                  ),
+                  DrawerTile(
+                    icon: Icons.info,
+                    title: 'About',
                     onTap: () {},
                   ),
                 ],
