@@ -1,8 +1,10 @@
 import 'package:drink_tracker/logic/cubits/diary/diary_cubit.dart';
 import 'package:drink_tracker/logic/cubits/page/page_cubit.dart';
 import 'package:drink_tracker/logic/cubits/saved_values/saved_values_cubit.dart';
+import 'package:drink_tracker/presentation/routing/routes.dart';
 import 'package:drink_tracker/presentation/screens/home/home_screen.dart';
 import 'package:drink_tracker/presentation/screens/login/login_screen.dart';
+import 'package:drink_tracker/presentation/widgets/new_drink_type_window.dart';
 import 'package:drink_tracker/presentation/screens/saved_values/saved_values_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +16,7 @@ class AppRouter {
 
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/home':
+      case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
             providers: [
@@ -35,7 +37,7 @@ class AppRouter {
       //   return MaterialPageRoute(
       //     builder: (_) => const LoginScreen(),
       //   );
-      case '/saved_values':
+      case Routes.savedValuesScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
             value: _savedValuesCubit,

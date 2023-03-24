@@ -28,8 +28,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () async {
-            await showDialog<void>(
+          onPressed: () {
+            showDialog<void>(
               context: context,
               builder: (_) {
                 return BlocProvider.value(

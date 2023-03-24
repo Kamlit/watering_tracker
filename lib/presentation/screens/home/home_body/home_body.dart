@@ -12,17 +12,24 @@ class HomeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isEmpty = diaryData.entries.isEmpty;
-    return isEmpty ? _buildEmptyBody() : _buildBody();
+    final isEmpty = diaryData.entries.isEmpty;
+    return isEmpty ? const _EmptyBody() : _ContentBody(data: diaryData);
   }
+}
 
-  Widget _buildBody() {
+class _ContentBody extends StatelessWidget {
+  const _ContentBody({required this.data});
+
+  final DiaryData data;
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           flex: 8,
           child: MililitresProgress(
-            data: diaryData,
+            data: data,
           ),
         ),
         const Expanded(
@@ -33,20 +40,25 @@ class HomeBody extends StatelessWidget {
           flex: 8,
           child: SemiCircularProgressBar(
             padding: 35,
-            data: diaryData,
+            data: data,
           ),
         ),
       ],
     );
   }
+}
 
-  Widget _buildEmptyBody() {
+class _EmptyBody extends StatelessWidget {
+  const _EmptyBody();
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           flex: 8,
           child: MililitresProgress(
-            data: diaryData,
+            data: DiaryData.empty(),
           ),
         ),
         const Expanded(
