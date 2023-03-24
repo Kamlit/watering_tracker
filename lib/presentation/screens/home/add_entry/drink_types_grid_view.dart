@@ -1,8 +1,12 @@
 import 'package:drink_tracker/TEMP_drink_types.dart';
+import 'package:drink_tracker/logic/cubits/saved_values/saved_values_cubit.dart';
 import 'package:drink_tracker/logic/helpers/extensions.dart';
 import 'package:drink_tracker/logic/models/drink_type.dart';
+import 'package:drink_tracker/presentation/routing/routes.dart';
 import 'package:drink_tracker/presentation/style.dart';
+import 'package:drink_tracker/presentation/widgets/new_drink_type_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DrinkTypesGridView extends StatelessWidget {
   const DrinkTypesGridView({
@@ -48,10 +52,18 @@ class DrinkTypesGridView extends StatelessWidget {
                 ),
               )
             : InkWell(
-                onTap: () {},
+                onTap: () => {
+                  showDialog<void>(
+                    context: context,
+                    builder: (_) => BlocProvider.value(
+                      value: BlocProvider.of<SavedValuesCubit>(context),
+                      child: const NewDrinkTypeWindow(),
+                    ),
+                  ),
+                },
                 child: const GridTile(
                   child: Card(
-                    shape:  RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius: AppBorderRadius.all,
                     ),
                     color: AppColors.greyDark,
