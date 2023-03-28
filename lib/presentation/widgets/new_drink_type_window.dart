@@ -5,9 +5,15 @@ import 'package:drink_tracker/presentation/widgets/transparent_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-class NewDrinkTypeWindow extends StatelessWidget {
+class NewDrinkTypeWindow extends StatefulWidget {
   const NewDrinkTypeWindow({super.key});
 
+  @override
+  State<NewDrinkTypeWindow> createState() => _NewDrinkTypeWindowState();
+}
+
+class _NewDrinkTypeWindowState extends State<NewDrinkTypeWindow> {
+  Color pickedColor = Colors.red;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -40,14 +46,29 @@ class NewDrinkTypeWindow extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    showDialog(
+                    showDialog<void>(
                       context: context,
-                      builder: (context) => AppColorPicker(),
+                      builder: (context) {
+                        return AppColorPicker(
+                          pickerColor: pickedColor,
+                          onColorPicked: (value) {
+                            pickedColor = value;
+                            setState(() {});
+                          },
+                        );
+                      },
                     );
                   },
-                  child: CircleAvatar(
-                    radius: 25,
-                    backgroundColor: Colors.red,
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(90),
+                      ),
+                      border: Border.all(color: AppColors.greyLight),
+                      color: pickedColor,
+                    ),
                   ),
                 ),
                 // CircleAvatar(
