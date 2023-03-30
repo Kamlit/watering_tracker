@@ -2,7 +2,12 @@ import 'package:drink_tracker/presentation/style.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
-  const AppTextField({super.key});
+  const AppTextField({
+    super.key,
+    required this.onChanged,
+  });
+
+  final void Function(String value) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +15,7 @@ class AppTextField extends StatelessWidget {
       width: 500,
       height: 60,
       child: TextField(
-        onChanged: (value) {},
+        onChanged: onChanged,
         textAlign: TextAlign.center,
         style: AppTextStyle.h2,
         decoration: const InputDecoration(

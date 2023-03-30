@@ -1,4 +1,5 @@
 import 'package:drink_tracker/TEMP_drink_types.dart';
+import 'package:drink_tracker/logic/cubits/edit_drink_type/edit_drink_type_cubit.dart';
 import 'package:drink_tracker/logic/cubits/saved_values/saved_values_cubit.dart';
 import 'package:drink_tracker/logic/helpers/extensions.dart';
 import 'package:drink_tracker/logic/models/drink_type.dart';
@@ -55,8 +56,15 @@ class DrinkTypesGridView extends StatelessWidget {
                 onTap: () => {
                   showDialog<void>(
                     context: context,
-                    builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<SavedValuesCubit>(context),
+                    builder: (_) => MultiBlocProvider(
+                      providers: [
+                        BlocProvider.value(
+                          value: BlocProvider.of<SavedValuesCubit>(context),
+                        ),
+                        BlocProvider(
+                          create: (_) => EditDrinkTypeCubit(),
+                        ),
+                      ],
                       child: const NewDrinkTypeWindow(),
                     ),
                   ),
